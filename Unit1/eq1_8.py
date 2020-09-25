@@ -1,12 +1,15 @@
 import turtle as t
 t.color("red", "yellow")
-t.speed(0)
+t.speed(10)
 # t.delay(0)
 
 t.begin_fill()
 while True:
     t.forward(200)
     t.left(170)
+    print(t.pos())
+    print(abs(t.pos()))
+    print()
     if abs(t.pos()) < 1:
         break
 t.end_fill()
