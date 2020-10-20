@@ -17,7 +17,7 @@ def printTriangle(line):
 #       1
 #     3   5
 #   7   9   11
-line = 20
+line = 15
 numList = range(1, math.factorial(line), 2)
 numListIter = iter(numList)  
 for i in range(line + 1):
@@ -28,7 +28,7 @@ for i in range(line + 1):
 
 
 
-###
+### 努力指数
 nowYearEffectiveness = 0.01
 oneYearEffectiveness = pow((1.0 + 0.01), 365)
 print("若一年都为1%: {}".format(oneYearEffectiveness))
@@ -52,4 +52,6 @@ print("每天努力指数: {:.3}".format(nowYearEffectiveness))
 # for i in range(1,1001):
 #     if str(i)[::-1] == str(i):
 #         print(i, end=" ")
+
+
     
