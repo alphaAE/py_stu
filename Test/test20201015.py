@@ -15,19 +15,21 @@
 #     cText += chr(ord(j) - 8)
 # print(cText)
 
-import time
-# t = time.clock()
 
 ### \r 动态刷新条
+import time
+
+# t = time.clock()
 for i in range(101):
-    print("\r [{}{}] {}%".format(">" * i, "-" * (100 - i), i), end="")
+    print("\r [{}{}]  {}%".format(">" * i, "_" * (100 - i), i), end="")
     time.sleep(0.02)
 print()
 
-import math
 ### 两位数的公约数
+import math
+
 numArr = [12, 40]
-gcd = math.gcd(numArr[0], numArr[1])
+# gcd = math.gcd(numArr[0], numArr[1])
 for i in range(numArr[0], 0, -1):
     if numArr[0] % i == 0 and numArr[1] % i == 0:
         gcd = i
