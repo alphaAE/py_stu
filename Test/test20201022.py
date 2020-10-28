@@ -28,7 +28,7 @@ for i in range(len(numList) - 1):
 
 print(numList)
 
-### 进度条 20 后低速 到 30 - 100 加速
+### 进度条 20 后低速 之后加速
 sleepTime = 1.0
 for i in range(101):
     if i % 20 == 0:
