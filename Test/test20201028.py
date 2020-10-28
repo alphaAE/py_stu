@@ -14,3 +14,28 @@ for i in range(len(listP)):
 
 # 遍历完成后输出最大值与索引
 print("最大值：{}\n所在列表二级列表索引：{}\n列表：{}".format(maxNum, index, listP[index]))
+
+
+### 
+import random
+
+listNum = []
+dictNum = dict()
+
+# 构造随机列表
+for i in range(100):
+    listNum.append(random.choice(range(101)))
+
+# 使用集合去重
+dictNumOnec = set(listNum)
+
+# 使用去重后的集合统计数量并构造字典
+for i in dictNumOnec:
+    dictNum[i] = listNum.count(i)
+
+# 为字典按值排序
+pass
+
+print(dictNumOnec)
+print(listNum)
+print(dictNum)
