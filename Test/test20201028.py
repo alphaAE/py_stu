@@ -16,26 +16,29 @@ for i in range(len(listP)):
 print("最大值：{}\n所在列表二级列表索引：{}\n列表：{}".format(maxNum, index, listP[index]))
 
 
-### 
+### 随机列表字典计数
 import random
 
-listNum = []
+listNum = list()
 dictNum = dict()
 
 # 构造随机列表
-for i in range(100):
-    listNum.append(random.choice(range(101)))
+for i in range(1000):
+    listNum.append(random.randint(0, 100))
 
 # 使用集合去重
-dictNumOnec = set(listNum)
+dictNumOnce = set(listNum)
 
 # 使用去重后的集合统计数量并构造字典
-for i in dictNumOnec:
+for i in dictNumOnce:
     dictNum[i] = listNum.count(i)
 
-# 为字典按值排序
-pass
+# 为字典按值降序排序
+listFromDictNum = sorted(dictNum.items(), key = lambda kv: kv[1], reverse = True)
 
-print(dictNumOnec)
-print(listNum)
-print(dictNum)
+# 输出排序列表前五项
+for i in range(5):
+    tmpKv = listFromDictNum[i]
+    print("Num:{:3}  Count:{:3}".format(tmpKv[0], tmpKv[1]))
+
+
