@@ -25,3 +25,4 @@ items.sort(key=lambda a: a[1], reverse=True)
 for i in range(10):
     word, count = items[i]
     print("{} : {}".format(word, count))
+
