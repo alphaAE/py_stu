@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js – The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<a href="#">
+						<img src="./reveal-white-text.png" alt="reveal.js logo" style="height: 180px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+					</a>
+					<h3>控制台超市系统</h3>
+					<p>
+						<small>第一小组</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>项目背景</h2>
+					<p>
+						本示例将会开发一个控制台超市系统，用户可以通过程序提供的命令进行购物
+					</p>
+					<img src="./j1.png" alt="reveal.js logo" style="height: 200px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>问题分析</h2>
+						<p>实质是货物这一数据的增删改查处理及其展示</p>
+						<br>
+						<ol>
+							<li>数据处理部分</li>
+							<li>UI处理部分</li>
+						</ol>
+						<!-- <br>
+						<a href="#" class="navigate-down">
+							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="178" height="238" data-src="https://static.slid.es/reveal/arrow.png" alt="Down arrow">
+						</a> -->
+					</section>
+					<section>
+						<h2>数据处理部分</h2>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							# 获取商品列表
+							def getProduct(self, id=-1): pass
+							# 获取购物清单
+							def getShopping(self, index=-1): pass
+							# 添加商品
+							def addProductToShoppingList(self, productId, count): pass
+							# 修改商品数量
+							def modifyProductFromShoppingList(self, productId, count): pass
+							# 删除商品
+							def removeProductFromShoppingList(self, productId): pass
+							# 清空商品
+							def clearProductFromShoppingList(self): pass
+						</code></pre>
+						<p>该类专做商品数据的处理，对外提供接口，并对数据合理性进行验证</p>
+					</section>
+					<section>
+						<h2>UI处理部分</h2>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|3-8|13-23"><script type="text/template">
+def __init__(self):
+  # 初始化菜单映射表
+  self.menuList = [
+    {"id": 1, "name": "显示当前超市商品清单", "fun": self.showProductList},
+    {"id": 2, "name": "显示用户购物清单", "fun": self.showShoppingList},
+    {"id": 3, "name": "添加商品", "fun": self.addProduct},
+    ...
+  ]
+# 程序主循环
+def runMainloop(self):
+  while self.programSwitch:
+  # 打印菜单并等待输入
+  try:
+    userInId = int(input("\n键入[功能序号]："))
+  except Exception:
+    self.cls()
+    print("\n输入有误！")
+    continue
+  for item in self.menuList:
+    if item["id"] == userInId:
+      execution = True
+      item["fun"]()
+      break
+  # 无对应项输出
+  if execution is False:
+    self.cls()
+    print("无对应选项")
+    ...
+						</script></code></pre>
+						<!-- <br>
+						<a href="#/2">
+							<img class="r-frame" style="background: rgba(255,255,255,0.1); transform: rotate(180deg);" width="178" height="238" data-src="https://static.slid.es/reveal/arrow.png" alt="Up arrow">
+						</a> -->
+					</section>
+				</section>
+
+				<section id="transitions">
+					<h2>功能介绍&展示</h2>
+					<p>将应用分成了6个小功能</p>
+					<ol>
+						<li><a href="#/transitions">显示当前超市商品清单</a></li>
+						<li><a href="#/transitions">显示用户购物清单</a></li>
+						<li><a href="#/transitions">添加商品</a></li>
+						<li><a href="#/transitions">修改商品数量</a></li>
+						<li><a href="#/transitions">删除已购商品</a></li>
+						<li><a href="#/transitions">结算</a></li>
+					</ol>
+				</section>
+
+				<section>
+					<section id="fragments">
+						<h2>总结</h2>
+						<p>软件开发流程部分的贯通...</p>
+						<p class="fragment">... Python语言开发基础 ...</p>
+						<p><span class="fragment">... 综合能力 ...</span></p>
+
+						<aside class="notes">
+							这是注释
+						</aside>
+					</section>
+					<section>
+						<h2>更多!</h2>
+						<p>
+							<span style="display: inline-block;" class="fragment fade-right">数据库, </span>
+							<span style="display: inline-block;" class="fragment fade-up">QT图形界面, </span>
+							<!-- <span style="display: inline-block;" class="fragment fade-down">网页展示, </span> -->
+							<span style="display: inline-block;" class="fragment fade-left">网页展示</span>
+						</p>
+					</section>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>谢谢</h1>
+					<p>
+						- <a href="#/5">尝试在 Jupyter 运行</a> <br>
+						- <a href="https://github.com/alphaAE/py_stu/tree/master/MidtermB">源代码 &amp; 文档</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>
