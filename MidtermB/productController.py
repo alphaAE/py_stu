@@ -90,3 +90,8 @@ class ProductController:
                 return self.returnMsg[0]
         # 不存在则返回错误
         return self.returnMsg[3]
+
+    # 删除商品
+    def clearProductFromShoppingList(self):
+        self.shoppingList.clear()
+        return self.returnMsg[0]

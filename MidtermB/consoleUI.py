@@ -17,7 +17,8 @@ class ConsoleUI:
             {"id": 3, "name": "添加商品", "fun": self.addProduct},
             {"id": 4, "name": "修改商品数量", "fun": self.modifyProduct},
             {"id": 5, "name": "删除已购商品", "fun": self.removeProduct},
-            {"id": 6, "name": "退出程序", "fun": self.exitProgram},
+            {"id": 6, "name": "结算", "fun": self.bill},
+            {"id": 7, "name": "退出程序", "fun": self.exitProgram},
         ]
         # 初始化商品数据控制器
         self.productController = ProductController()
@@ -136,6 +137,18 @@ class ConsoleUI:
         # 结果正常则展示购物清单
         if returnMsg["code"] == ProductController.SUCCESS:
             self.showShoppingList()
+
+    # 结算
+    def bill(self):
+        # 计算展示总价
+        self.showShoppingList()
+        sumNum = 0
+        for item in self.productController.getShopping():
+            price = self.productController.getProduct(item["productId"])["price"]
+            sumNum += item["count"] * price
+        print("\n 总价：{}".format(sumNum))
+        # 清空购物清单
+        self.productController.clearProductFromShoppingList()
 
     # 关闭程序
     def exitProgram(self):
