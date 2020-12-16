@@ -1,3 +1,4 @@
+### 生日悖论
 import random
 
 

@@ -1,4 +1,5 @@
-#  生成数据
+### DataFrame练习
+# 生成数据
 import pandas as pd
 import numpy as np
 

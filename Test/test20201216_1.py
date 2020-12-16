@@ -12,7 +12,7 @@ class PlotCanvas:
         matplotlib.rcParams['font.sans-serif'] = ['SimHei']
         matplotlib.rcParams['axes.unicode_minus'] = False
 
-    def broken_line(self, y):
+    def broken_line(self, x, y):
         '''
         y:y轴折线点，也就是价格
         linewidth:折线的宽度
@@ -21,7 +21,6 @@ class PlotCanvas:
         markerfacecolor：折点实心颜色
         markersize：折点大小
         '''
-        x = list(range(1, 101))
         plt.plot(x, y, linewidth=1)  # 绘制折线
 
     def show(self):
@@ -33,9 +32,16 @@ class PlotCanvas:
 
 
 p = PlotCanvas()
+x = list()
+y = list()
 
-for i in range(100):
-    y1 = numpy.random.randint(10, 100, 100)
-    p.broken_line(y1)
+diaoLine = [(4, 2), (3, 1), (2, 1), (1, 2), (1, 3), (2, 4), (3, 4), (4, 3),
+            (4, 10), (5, 11), (6, 11), (7, 10),
+            (7, 3), (8, 4), (9, 4), (10, 3), (10, 2), (9, 1), (8, 1), (7, 2)]
+for tX, tY in diaoLine:
+    x.append(tX)
+    y.append(tY)
+
+p.broken_line(x, y)
 
 p.show()
