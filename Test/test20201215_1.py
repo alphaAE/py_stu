@@ -1,4 +1,6 @@
 import jieba
+import numpy as np
+from PIL import Image
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
@@ -16,12 +18,14 @@ tmpFile.close()
 words = jieba.lcut(txt)
 words_all = ' '.join(words)
 
+color_mask = np.array(Image.open("./Test/diaotu.png"))
+
 # width,height,margin可以设置图片属性
 # generate 可以对全部文本进行自动分词,但是对中文支持不好
 # 可以设置font_path参数来设置字体集
 # background_color参数为设置背景颜色,默认颜色为黑色
-wordcloud = WordCloud(background_color="white",
-                      width=1000, height=860, margin=2)
+wordcloud = WordCloud(background_color="white", width=1000,
+                      height=860, margin=2, font_path="./simhei", mask=color_mask)
 
 # 词云对象加入分析句子的来源
 wordcloud.generate(words_all)
