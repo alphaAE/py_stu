@@ -20,7 +20,7 @@ result = cv2.blur(img, (5, 5))
 # 高斯滤波
 result = cv2.GaussianBlur(img, (21, 21), 0)
 
-cv2.imshow("face", result)
+cv2.imshow("face", img)
 # 等待显示
 cv2.waitKey(0)
 cv2.destroyAllWindows()
