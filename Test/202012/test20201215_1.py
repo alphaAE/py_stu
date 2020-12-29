@@ -11,12 +11,18 @@ plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
 
 # 文件打开 读取到变量 关闭
-tmpFile = open("./Test/shiguang.txt", "r", encoding="utf-8")
+tmpFile = open("./OutFile/sanguo.txt", "r", encoding="utf-8")
 txt = tmpFile.read()
 tmpFile.close()
 
 # 对文章切片
 words = jieba.lcut(txt)
+words2 = list()
+for word in words:
+    # 屏蔽2个字以下的字词
+    if len(word) >= 2:
+        words2.append(word)
+
 words_all = ' '.join(words)
 
 color_mask = np.array(Image.open("./Test/diaotu.png"))
