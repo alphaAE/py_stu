@@ -19,6 +19,7 @@ while True:
         print("查无此词，向字典追加 [{}]:".format(inStr))
         value = input()
         dictData[inStr] = value
+        # 遍历字典保存csv
         with open("./OutFile/data2.csv", "w", encoding="utf8", newline='') as _file:
             _writer = csv.writer(_file)
             for item in dictData.items():
