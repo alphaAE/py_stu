@@ -19,7 +19,7 @@ def decToHex(num):
     return "0x" + outStr[::-1]
 
 
-while True:
+while False:
     base = input("输入(进制): ")
     num = input("输入(数值): ")
     if base in ['B']:
