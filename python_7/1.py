@@ -7,7 +7,6 @@ for i in range(6):
     turtle.left(180 - ((6 - 2) * 180 / 6))
 turtle.penup()
 
-
 turtle.setpos(-100, -100)
 
 #六角星

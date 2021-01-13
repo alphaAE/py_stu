@@ -1,4 +1,3 @@
-
 # 回文
 strIn = "asdfdsa"
 
@@ -21,6 +20,6 @@ for n in range(1, 1001):
 for n in range(100, 1001):
     sum = 0
     for i in str(n):
-        sum += int(i) ** 3
+        sum += int(i)**3
     if n == sum:
         print(n)

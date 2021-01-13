@@ -2,8 +2,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy
 
-x = ['a','b','c','d']
-y = [1,2,5,3]
+x = ['a', 'b', 'c', 'd']
+y = [1, 2, 5, 3]
 
 # 柱状图
 plt.bar(x, y, color='r', alpha=0.8)
