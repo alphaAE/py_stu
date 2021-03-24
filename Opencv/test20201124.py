@@ -17,8 +17,14 @@ for i in range(5000):
 
 # 均值滤波
 result = cv2.blur(img, (5, 5))
+cv2.imshow("result", result)
+
 # 高斯滤波
 result = cv2.GaussianBlur(img, (21, 21), 0)
+cv2.imshow("result2", result)
+
+# 中值滤波
+
 
 cv2.imshow("face", img)
 # 等待显示
