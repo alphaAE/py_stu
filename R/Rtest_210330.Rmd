@@ -1,0 +1,98 @@
+---
+title: "Rtest_210330"
+author: "ae"
+date: "2021/3/30"
+output: word_document
+---
+
+## 直观分析：图示法
+```{r}
+x1=c(171,175,159,155,152,158,154,164,168,166,159,164)
+x2=c(57,64,41,38,35,44,41,51,57,49,47,46)
+plot(x1,x2)
+
+```
+
+## 用离均差乘积和计算相关系数
+```{r}
+lxy<-function(x,y)       
+sum(x*y)-sum(x)*sum(y)/length(x)
+r=lxy(x1,x2)/sqrt(lxy(x1,x1)*lxy(x2,x2))
+r
+```
+
+## 计算相关系数r的t值
+```{r}
+n=length(x1)#向量的长度
+tr=r/sqrt((1-r^2)/(n-2))#相关系数假设检验t统计量
+tr
+```
+
+## 计算t值和P值，作结论
+```{r}
+cor.test(x1,x2)#相关系数假设检验
+
+```
+
+## 建立直线回归方程
+```{r}
+x=x1#自变量,数据来自例2.2
+y=x2#因变量,数据来自例2.2
+b=lxy(x,y)/lxy(x,x)#线性回归方程斜率
+a=mean(y)-b*mean(x)#线性回归方程截距
+c(a=a,b=b)#显示线性回归方程估计值
+```
+
+## 散点图
+```{r}
+plot(x,y)#做散点图
+lines(x,a+b*x)#添加估计方程线
+```
+
+## 例 4-3
+```{r}
+library(xlsx)
+yX = read.xlsx("./mvstats5.xlsx","d4.3",encoding="UTF-8")
+fm=lm(y~x,data=yX)
+plot(y~x,data=yX)#做散点图
+abline(fm)#添加回归线
+anova(fm)#模型方差分析
+summary(fm)#回归系数t检验
+
+
+```
+
+## 例 4-4 PASS
+```{r}
+library(xlsx)
+yX = read.xlsx("./mvstats5.xlsx","d4.4",encoding="UTF-8")
+fm=lm(y~x1+x2+x3+x4,data=yX)
+fm
+
+#library(mvstats)
+#coef.sd(fm)#标准化偏回归系数结果
+
+cor(yX) #多元数据相关系数矩阵
+
+source('msaR.r')  #调用自定义函数
+msa.cor.test(yX) #多元数据相关系数检验
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
