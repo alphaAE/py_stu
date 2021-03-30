@@ -1,0 +1,155 @@
+---
+title: "Untitled_0323"
+author: "ae"
+date: "2021/3/23"
+output: word_document
+---
+
+# 
+```{r}
+# 处理表头问题
+msa.X <- function(df){
+  X = df[,-1]
+  rownames(X) = df[,1]
+  X
+}
+
+
+library(xlsx)
+d3_1_xlsx = read.xlsx("./mvstats5.xlsx","d3.1",encoding="UTF-8")
+d3_1_xlsx = msa.X(d3_1_xlsx)
+d3_1_xlsx
+
+d3_1_csv = read.csv("./mvstats5.csv")
+d3_1_csv = msa.X(d3_1_csv)
+d3_1_csv
+
+```
+
+# 按行做均值条形图
+```{r}
+barplot(apply(d3_1_xlsx,1,mean))
+```
+
+# 修改横坐标位置
+```{r}
+barplot(apply(d3_1_xlsx,1,mean),las=3) 
+```
+
+# 按列做均值图条形
+```{r}
+barplot(apply(d3_1_xlsx,2,mean)) 
+```
+
+# 按列做彩色均值图条形图
+```{r}
+barplot(apply(d3_1_xlsx,2,mean),col=1:8)
+```
+
+# 按列做中位数条形图
+```{r}
+barplot(apply(d3_1_xlsx,2,median),col=1:8)
+```
+
+#按列做均值饼图
+```{r}
+pie(apply(d3_1_xlsx,2,mean))
+```
+
+#按列做垂直箱线图
+```{r}
+boxplot(d3_1_xlsx) 
+```
+
+#水平箱线图
+```{r}
+boxplot(d3_1_xlsx,horizontal=T)
+```
+
+#简单星相图
+```{r}
+stars(d3_1_xlsx) 
+```
+ 
+
+#带图例的星相图
+```{r}
+stars(d3_1_xlsx,key.loc=c(17,7)) 
+```
+
+
+#带图例度彩色星相图
+```{r}
+stars(d3_1_xlsx,key.loc=c(17,7),draw.segments=T)  
+```
+
+
+#彩色脸谱图
+```{r}
+library(aplpack)
+faces(d3_1_xlsx,ncol.plot=7)
+faces(d3_1_xlsx[,2:8],ncol.plot=7)
+faces(d3_1_xlsx[c(1,9,19,28,29,30),])  
+
+```
+
+  
+#黑白脸谱图
+```{r}
+library(TeachingDemos)
+faces2(d3_1_xlsx,ncol.plot=7)
+```
+
+ 
+#一般调和曲线图
+```{r}
+library(andrews)
+andrews(d3_1_xlsx,clr=5,ymax=6)
+```
+
+
+```{r}
+source('./msaR.r')
+msa.andrews(d3_1_xlsx)
+```
+
+
+#部分观测值的调和曲线图
+```{r}
+msa.andrews(d3_1_xlsx[c(1,9,19,28,29,30),])  
+```
+
+
+```{r}
+library(openxlsx)
+Case3 = read.xlsx('./mvcase5.xlsx','Case3',rowNam =T);head(Case3)
+summary(Case3)
+boxplot(Case3)
+rm= apply(Case3,1,mean); rm
+barplot(rm,las = 3) #按行作均值图
+cm = apply(Case3,2,mean); cm
+barplot(cm,horiz = T)
+stars(Case3,key.loc =c(8,2))
+stars(Case3,draw.segments= T,key.loc=c(8,2))
+library(aplpack)
+faces(Case3)
+msa.andrews( Case3 )
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
