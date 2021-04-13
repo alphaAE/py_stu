@@ -1,0 +1,140 @@
+---
+title: "Rtest_210413"
+author: "ae"
+date: "2021/4/13"
+output: word_document
+---
+
+
+## 例 4-4
+```{r}
+library(xlsx)
+yX = read.xlsx("./mvstats5.xlsx","d4.4",encoding="UTF-8")
+fm=lm(y~x1+x2+x3+x4,data=yX)
+fm
+
+#标准化偏回归系数
+coef.sd<-function(fm){
+b=fm$coef;b
+si=apply(fm$model,2,sd);si
+bs=b[-1]*si[-1]/si[1]
+bs}
+
+coef.sd(fm)
+
+summary(fm) #多元数据相关系数t检验
+
+```
+
+模型方程为：
+y^ = 23.532109 - 0.003387 * x1 + 1.164115 * x2 + 0.000292 * x3 - 0.043742 * x4
+
+由方差结果可见，模型的F为2.29e+04，P<0.0001，该模型是有意义的
+
+
+# 例 4.5
+```{r}
+# 两个变量的相关系数
+cor(yX) #多元数据相关系数矩阵
+plot(yX,gap = 0)  #多元数据散点图
+# 计算相关系数的t值和P值
+source('msaR.r')  #调用自定义函数
+msa.cor.test(yX) #多元数据相关系数检验
+```
+
+以上结果可以看出，财政收入和国内生产总值及其税收、出口贸易总额、经济活动人口之间的关系都非常密切，t>0.6,P<0.001，财政收入与税收之间的关系最为密切，t=0.9995,P<0.001
+
+## 回归变量选择方法
+```{r}
+library(leaps)
+# 多元数据线性回归变量选择模型
+varsel = regsubsets(y~x1+x2+x3+x4, data=yX)
+# 变量选择方法结果
+result = summary(varsel)
+data.frame(result$outmat, RSS = result$rss, R2 = result$rsq)
+```
+
+## BIC准则选择最优子集
+```{r}
+# 调整决定系数，Cp和BIC准则结果展示
+data.frame(result$outmat, adjR2 = result$adjr2, Cp = result$cp, BIC = result$bic)
+```
+
+## 向前引入法
+```{r}
+# 构造模型
+fm=lm(y~x1+x2+x3+x4, data=yX)
+# 向前引入法变量选择结果
+fm.step = step(fm, direction = "forward")
+```
+
+## 向后引入法
+```{r}
+# 向后引入法变量选择结果
+fm.step = step(fm, direction = "backward")
+```
+
+## 逐步筛选法
+```{r}
+# 逐步筛选法变量选择结果
+fm.step = step(fm, direction = "both")
+```
+
+```{r}
+summary(fm.step)
+```
+
+模型方程为：
+y^ = 24.94872 + 1.14796 * x2 - 0.04682 * x4
+
+由方差结果可见，模型的F为4.89e+04，P<0.0001，该模型是有意义的
+
+
+## 案例4：财政收入的多因素分析
+```{r}
+source('./msaR.r')
+
+case4 = read.xlsx("./mvcase5.xlsx","Case4",encoding="UTF-8")
+summary(case4)
+# 相关分析
+cor(case4)
+# 矩阵散点图
+plot(case4, gap = 0)
+msa.cor.test(case4)
+```
+
+## 构建模型
+```{r}
+fm = lm(y~., data = case4)
+summary(fm)
+```
+
+模型方程为：
+y^ = 1.43e+02 - 1.14e-01 * x1 - 4.42e-03 * x2 + ... + 2.52e+00 * x9
+
+由方差结果可见，模型的F为815，P<0.0001，该模型是有意义的
+
+## 向后引入法
+```{r}
+fm.step = step(fm)
+summary(fm.step)
+```
+
+模型方程为：
+y^ = -3.38e+02 - 1.49e-01 * x1 - 3.83e-03 * x2 + ... + 2.49e-01 * x8
+
+## 绘图分析
+```{r}
+plot(case4$y)
+lines(fm.step$fitted)
+```
+
+
+
+
+
+
+
+
+
+
