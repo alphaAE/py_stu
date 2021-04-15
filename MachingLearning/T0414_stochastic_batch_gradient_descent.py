@@ -20,7 +20,7 @@ X_train, X_test, y_train, y_test = train_test_split(X,
 #sklearn 标准化函数
 scaler = StandardScaler()
 # 计算均值和方差
-scaler.fix(X_train)
+scaler.fit(X_train)
 # 将数据集标准化
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
@@ -28,13 +28,21 @@ X_test = scaler.transform(X_test)
 # 训练模型
 sgd = SGDRegressor()
 sgd.fit(X_train, y_train)
-y_predict = sgd.predict(X_train)
+y_predict = sgd.predict(X_test)
 
 # 评价结果
-print("平均绝对误差：{}".format(mean_absolute_error(y, y_predict)))
-print("均方误差：{}".format(mean_squared_error(y, y_predict)))
-print("中值绝对误差：{}".format(median_absolute_error(y, y_predict)))
-print("可解释方差值：{}".format(explained_variance_score(y, y_predict)))
-print("R方值：{}".format(r2_score(y, y_predict)))
+print("平均绝对误差：{}".format(mean_absolute_error(y_test, y_predict)))
+print("均方误差：{}".format(mean_squared_error(y_test, y_predict)))
+print("中值绝对误差：{}".format(median_absolute_error(y_test, y_predict)))
+print("可解释方差值：{}".format(explained_variance_score(y_test, y_predict)))
+print("R方值：{}".format(r2_score(y_test, y_predict)))
 
-# plt.scatter()
+#真实值
+plt.scatter(
+    range(len(X_test)),
+    y_test,
+    c="g",
+)
+#预测值
+plt.scatter(range(len(X_test)), y_predict, c='r')
+plt.show()
