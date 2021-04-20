@@ -1,0 +1,59 @@
+---
+title: "Rtest_210420"
+author: "ae"
+date: "2021/4/20"
+output: word_document
+---
+
+
+## 例 5-1
+```{r}
+library(xlsx)
+yX = read.xlsx("./mvstats5.xlsx", "d5.1", encoding="UTF-8")
+# Logistic 回归模型
+logit.glm <- glm(y~x1+x2+x3, family=binomial, data=yX)
+# 回归模型结果
+summary(logit.glm) 
+
+```
+
+模型方程为：
+y^ = 0.597610 - 1.496084 * x1 - 0.001595 * x2 + 0.000292 * x3 + 0.315865 * x4
+
+```{r}
+# 逐步筛选变量
+logit.step <- step(logit.glm, direction = "both")
+# 筛选后结果
+summary(logit.step) 
+```
+
+模型方程为：
+y^ = 0.6190 - 1.3728 * x1
+
+```{r}
+pre1 <- predict(logit.step, data.frame(x1 = 1))
+p1 <- exp(pre1) / (1 + exp(pre1))
+pre2 <- predict(logit.step, data.frame(x1 = 0))
+p2 <- exp(pre2) / (1 + exp(pre2))
+c(p1, p2)
+```
+
+
+
+## 案例 5 广义线性模型的应用
+```{r}
+library(xlsx)
+case5 = read.xlsx("./mvcase5.xlsx", "Case5", encoding="UTF-8")
+# Logistic 回归模型
+logit.glm <- glm(y~sex+age, family=binomial, data=case5)
+# 回归模型结果
+summary(logit.glm) 
+
+fv = logit.glm$fitted.values
+p <- exp(fv) / (1 + exp(fv))
+cbind(case5$y, p)
+plot(case5$age, p)
+```
+
+模型方程为：
+y^ = 2.92193 - 1.07174 * sex - 0.05564 * age
