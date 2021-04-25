@@ -1,0 +1,76 @@
+---
+title: "Rtest_210425"
+author: "ae"
+date: "2021/4/25"
+output: word_document
+---
+
+
+## 例 6-2
+```{r}
+library(xlsx)
+yX = read.xlsx("./mvstats5.xlsx", "d6.1", encoding="UTF-8")
+
+# 单变量分析
+boxplot(x1 ~ G, yX);
+boxplot(x2 ~ G, yX);
+t.test(x1 ~ G, yX);
+t.test(x2 ~ G, yX);
+
+# Logistic 回归模型分析
+summary(glm(G-1 ~ x1+x2, family=binomial, data=yX))
+```
+
+模型方程为：
+y^ = -2.0761 - 0.195 * x1 + 0.3813 * x2
+
+```{r}
+with(yX, {
+    plot(x1, x2)
+    text(x1, x2, G, adj = -0.5)
+})
+```
+
+# Fisher 线性判别法
+```{r}
+# 绑定数据
+attach(yX)
+# 标识点所属G
+plot(x1, x2)
+text(x1, x2, G, adj = -0.5)
+```
+
+```{r}
+library(MASS)
+ld= lda(G ~ x1 + x2)
+ld
+
+# 根据线性判别模型预测所属类别
+lp = predict(ld)
+# 预测结果
+G1 = lp$class
+data.frame(G, G1)
+# 判别矩阵
+tab1 = table(G, G1)
+tab1
+# 判对率
+sum(diag(prop.table(tab1)))
+```
+
+# 绘制判别线
+```{r}
+a1 = ld$scaling[1,]
+a2 = ld$scaling[2,]
+# y = a1x1 + a2x2 -> x2 = y0 / a2 -a1 / a2x1
+a = 1 / a2 * (a1 * mean(x1) + a2 * mean(x2))
+b = -a1 / a2
+plot(x1, x2)
+abline(a, b)
+text(x1, x2, G1, adj = -0.5)
+```
+
+# 预测测试
+```{r}
+predict(ld, data.frame(x1 = 8.1, x2 = 2.0))
+plot(ld, type= 'both')
+```
