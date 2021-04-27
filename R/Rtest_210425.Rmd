@@ -9,7 +9,7 @@ output: word_document
 ## 例 6-2
 ```{r}
 library(xlsx)
-yX = read.xlsx("./mvstats5.xlsx", "d6.1", encoding="UTF-8")
+yX = read.xlsx("./R/mvstats5.xlsx", "d6.1", encoding="UTF-8")
 
 # 单变量分析
 boxplot(x1 ~ G, yX);

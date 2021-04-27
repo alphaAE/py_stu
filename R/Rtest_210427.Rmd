@@ -1,0 +1,90 @@
+---
+title: "Rtest_210427"
+author: "ae"
+date: "2021/4/27"
+output: word_document
+---
+
+
+## 6.3.1 距离判别法
+```{r}
+library(xlsx)
+library(MASS)
+yX = read.xlsx("./mvstats5.xlsx", "d6.1", encoding="UTF-8")
+
+with(yX, {
+    # 线性判别分析
+    ld= lda(G ~ x1 + x2)
+    # 根据线性判别模型预测所属类别
+    lp = predict(ld)
+    # 预测结果
+    G1 = lp$class
+
+    # 非线性判别模型
+    qd = qda(G ~ x1 + x2)
+    print(qd)
+    # 根据 qd 模型预测所属类别
+    qp = predict(qd)
+    # 预测的所属类别结果
+    G2 = qp$class
+    # 显示结果
+    print(data.frame(G, G1, G2))
+    tab2 = table(G, G2)
+    print(tab2)
+    print(sum(diag(prop.table(tab2))))
+    # 测试判定
+    print(predict(qd, data.frame(x1 = 8.1, x2 = 2.0)))
+})
+
+```
+
+
+## 6.3.2 多总体距离判别
+```{r}
+library(xlsx)
+library(MASS)
+yX = read.xlsx("./mvstats5.xlsx", "d6.3", encoding="UTF-8")
+
+with(yX, {
+    # 质量评分 功能评分 销售价格 分组图
+    plot(Q, C)
+    text(Q, C, G3, adj = -0.8, cex = 0.75)
+
+    plot(Q, P)
+    text(Q, P, G3, adj = -0.8, cex = 0.75)
+
+    plot(C, P)
+    text(C, P, G3, adj = -0.8, cex = 0.75)
+
+    # 线性判别（等方差）
+    ld3 = lda(G3 ~ Q + C + P)
+    print(ld3)
+    lp3 = predict(ld3)
+    lG3 = lp3$class
+    # 显示结果
+    print(data.frame(G3, lG3))
+    tab3 = table(G3, lG3)
+    print(diag(prop.table(tab3, 1)))
+    print(sum(diag(prop.table(tab3))))
+    # 绘图
+    plot(lp3$x)
+    text(lp3$x[,1], lp3$x[,2], lG3, adj = -0.8, cex = 0.75) 
+
+    # 测试判定
+    print(predict(ld3, data.frame(Q = 8, C = 7.5, P = 65)))
+
+    # 二次判别（异差法）
+    qd3 = qda(G3 ~ Q + C + P)
+    print(qd3)
+    qp3 = predict(qd3)
+    qG3 = qp3$class
+    # 显示结果
+    print(data.frame(G3, lG3, qG3))
+    qtab3 = table(G3, qG3)
+    print(qtab3)
+    print(sum(diag(prop.table(qtab3))))
+    # 测试判定
+    print(predict(qd3, data.frame(Q = 8, C = 7.5, P = 65)))
+})
+
+```
