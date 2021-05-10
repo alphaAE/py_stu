@@ -1,0 +1,70 @@
+---
+title: "Rtest_210427"
+author: "ae"
+date: "2021/4/27"
+output: word_document
+---
+
+
+## 
+```{r}
+library(openxlsx)
+dataSheet = read.xlsx("./R/mvexer5.xlsx", "E3.2", colNames = TRUE, rowNames = TRUE)
+dataSheet
+```
+
+```{r}
+# 按行作均值条形图
+barplot(apply(dataSheet, 2, mean))
+# 修改横坐标标记
+barplot(apply(dataSheet, 1, mean), las = 3)
+# 按列作均值条图
+barplot(apply(dataSheet, 2, mean))
+# 按列作中位数条图
+barplot(apply(dataSheet, 2, median))
+# 按列取色
+barplot(apply(dataSheet, 2, median), col = 1:8)
+```
+
+```{r}
+# 按列作箱尾图
+boxplot(dataSheet)
+# 箱尾图中图形按水平放置
+boxplot(dataSheet, horizontal = TRUE)
+```
+
+```{r}
+# 全角星相图
+stars(dataSheet, full = T, key.loc = c(13, 1.5))
+# 半角星相图
+stars(dataSheet, full = F, key.loc = c(13, 1.5))
+# 扇形星相图
+stars(dataSheet, full = T, draw.segments = T, key.loc = c(13, 1.5))
+```
+
+```{r}
+# install.packages('aplpack',repos="https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
+library(aplpack)
+# 按每行7个作脸谱图
+faces(dataSheet, ncol.plot = 7)
+```
+
+```{r}
+# install.packages('TeachingDemos',repos="https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
+library(TeachingDemos)
+# 作黑白脸谱图
+faces2(dataSheet, ncols = 7)
+```
+
+```{r}
+# install.packages('andrews',repos="https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
+library(andrews)
+# 一般调和曲线
+andrews(dataSheet, clr = 2,ymax = 5)
+
+source('./R/msaR.r')
+#改进调和曲线
+msa.andrews(dataSheet)
+#作第1，3，5，7，9，11，13，15，17个观测的调和曲线图
+msa.andrews(dataSheet[c(1 , 3, 5, 7, 9, 11, 13, 15, 17),])
+```
