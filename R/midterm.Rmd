@@ -8,22 +8,27 @@ output: word_document
 
 ## 
 ```{r}
-library(openxlsx)
-dataSheet = read.xlsx("./R/mvexer5.xlsx", "E3.2", colNames = TRUE, rowNames = TRUE)
+library(xlsx)
+#library(openxlsx)
+dataSheet = read.xlsx("./mvexer5.xlsx", "E3.2", colNames = TRUE, rowNames = TRUE)
 dataSheet
 ```
 
 ```{r}
 # 按行作均值条形图
-barplot(apply(dataSheet, 2, mean))
+barplot(apply(dataSheet, 1, mean))
 # 修改横坐标标记
-barplot(apply(dataSheet, 1, mean), las = 3)
+par(las = 3)
+barplot(apply(dataSheet, 1, mean))
 # 按列作均值条图
+par(las = 0)
 barplot(apply(dataSheet, 2, mean))
 # 按列作中位数条图
 barplot(apply(dataSheet, 2, median))
 # 按列取色
-barplot(apply(dataSheet, 2, median), col = 1:8)
+barplot(apply(dataSheet, 2, median), 
+        col = c("blue", "red", "yellow")
+       )
 ```
 
 ```{r}
@@ -60,9 +65,9 @@ faces2(dataSheet, ncols = 7)
 # install.packages('andrews',repos="https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
 library(andrews)
 # 一般调和曲线
-andrews(dataSheet, clr = 2,ymax = 5)
+andrews(dataSheet, clr = 2, ymax = 5)
 
-source('./R/msaR.r')
+source('./msaR.r')
 #改进调和曲线
 msa.andrews(dataSheet)
 #作第1，3，5，7，9，11，13，15，17个观测的调和曲线图
