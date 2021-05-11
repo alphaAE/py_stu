@@ -1,7 +1,7 @@
 ---
-title: "Rtest_210427"
+title: "Rtest_210511"
 author: "ae"
-date: "2021/4/27"
+date: "2021/5/11"
 output: word_document
 ---
 
@@ -17,14 +17,14 @@ dataSheet
 # 算y与x1~x7的相关系数矩阵并绘制矩阵散点图，并做简要分析
 cor(dataSheet)
 # with(dataSheet, {
-#     plot(x1, x2, x3, x4, x5, x6, x7)
-# #     text(x1, x2, G, adj = -0.5)
+#     plot(x1, x2)
+#     text(x1, x2, G, adj = -0.5)
 # })
 ```
 
 ```{r}
 # 2.求y与x1~x7的多元线性回归方程y=a1*x1+a2*x2+…+a7*x7；
-dataSheet.lm <- lm(y~x1+x2+x3+x4+x5+x6+x7, data=dataSheet) #建立回归方程
+dataSheet.lm = lm(y~x1+x2+x3+x4+x5+x6+x7, data=dataSheet) #建立回归方程
 summary(dataSheet.lm)
 ```
 模型方程为：
@@ -45,7 +45,7 @@ y^ = 7.233e+02 + 2.992e-03 * x1 + 1.569e-01 * x2 + 6.151e+00 * x3 + 2.477e-02 * 
 # 重复此步骤，建立所有回归变量均显著的回归方程
 
 # 逐步筛选变量
-dataSheet.step <- step(dataSheet.lm, direction = "both")
+dataSheet.step = step(dataSheet.lm, direction = "both")
 # 筛选后结果
 summary(dataSheet.step) 
 ```
@@ -120,7 +120,6 @@ with(dataSheet3, {
     print(sum(diag(prop.table(tab3))))
     # 绘图
     plot(dataSheet3.pre$x)
-    text(dataSheet3.pre$x[,1], dataSheet3.pre[,2], lG3, adj = -0.8, cex = 0.75) 
 
 # 3.请使用线性判别模型对数据进行回判，并描述回判结果，以及计算该判别模型的准确率
     print(predict(dataSheet3.lda, data.frame(x1 = 60, x2 = 1, x3 = 11)))
