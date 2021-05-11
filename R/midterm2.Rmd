@@ -1,0 +1,173 @@
+---
+title: "Rtest_210427"
+author: "ae"
+date: "2021/4/27"
+output: word_document
+---
+
+
+## 多元回归
+```{r}
+library(openxlsx)
+dataSheet = read.xlsx("./mtdata.xlsx", "1", colNames = TRUE, rowNames = TRUE)
+dataSheet
+```
+
+```{r}
+# 算y与x1~x7的相关系数矩阵并绘制矩阵散点图，并做简要分析
+cor(dataSheet)
+# with(dataSheet, {
+#     plot(x1, x2, x3, x4, x5, x6, x7)
+# #     text(x1, x2, G, adj = -0.5)
+# })
+```
+
+```{r}
+# 2.求y与x1~x7的多元线性回归方程y=a1*x1+a2*x2+…+a7*x7；
+dataSheet.lm <- lm(y~x1+x2+x3+x4+x5+x6+x7, data=dataSheet) #建立回归方程
+summary(dataSheet.lm)
+```
+模型方程为：
+y^ = 7.233e+02 + 2.992e-03 * x1 + 1.569e-01 * x2 + 6.151e+00 * x3 + 2.477e-02 * x4 - 4.464e-02 * x5 + 6.088e-03 * x6 + 1.650e+01 * x7
+
+```{r}
+# 3.请给出对回归方程进行显著性检验的原假设，并判断在显著性水平为0.05的条件下，该模型是否有意义，且给出判断依据
+```
+由上表可得，F检验，p（1.572e-06）<0.05，说明此回归模型有显著性的，有意义。
+
+```{r}
+# 4.请给出对回归系数进行显著性检验的原假设，并判断在显著性水平为0.05的条件下，每个变量是否显著
+```
+由上表可得，在显著性水平a=0.05时，只有x1,x4,x5,x6的P值<0.05,通过检验，回归系数较为显著。其余自变量的P值均大于0.05,即x2,x3,x7的系数均不显著。
+
+```{r}
+# 5.如果有的回归系数没有通过显著性检验，请将其剔除，重新建立回归方程，再做回归方程的显著性检验和回归系数的显著性检验，
+# 重复此步骤，建立所有回归变量均显著的回归方程
+
+# 逐步筛选变量
+dataSheet.step <- step(dataSheet.lm, direction = "both")
+# 筛选后结果
+summary(dataSheet.step) 
+```
+筛选后模型方程为：
+y^ = - 5.252e+02 + 2.893e-03 * x1 + 2.021e-01 * x2 + 5.433e+00 * x3 + 1.812e-02 * x4 - 3.845e-02 * x5 + 6.575e-03 * x6
+
+
+
+
+## logistic回归模型的应用
+```{r}
+library(openxlsx)
+dataSheet2 = read.xlsx("./mtdata.xlsx", "2")
+dataSheet2
+```
+
+```{r}
+# 1.请建立logistic模型并简要分析
+dataSheet2.glm = glm(G ~ x1+x2+x3, family=binomial, data=dataSheet2)
+summary(dataSheet2.glm)
+```
+模型方程为：
+y^ = 3.655016 - 2.501844 * x1 + 0.082168 * x2 + 0.001517 * x3
+
+```{r}
+# 2.给出p（y=1）概率公式，并计算所有样本乘坐公共汽车上班的概率
+
+```
+
+```{r}
+# 3.根据建立的模型，判定某人（x1=1,x2=24,x3=1700）上下班的交通工具是啥
+predict(dataSheet2.glm)
+dataSheet2.predict = predict(dataSheet2.glm, data.frame(x1 = 1, x2 = 24, x3 = 1700))
+dataSheet2.predict
+```
+得出结论该人上下班的交通工具是骑自行车上下班
+
+
+
+
+## 判别分析
+```{r}
+# 1.做两变量的散点图，观察他们在平面上的散布情况，该组数据是否适合做判别分析
+library(MASS)
+dataSheet3 = read.xlsx("./mtdata.xlsx", "3", colNames = TRUE, rowNames = TRUE)
+dataSheet3
+
+with(dataSheet3, {
+    plot(x1, x2)
+    text(x1, x2, G, adj = -0.8, cex = 0.75)
+
+    plot(x1, x3)
+    text(x1, x3, G, adj = -0.8, cex = 0.75)
+
+    plot(x2, x3)
+    text(x2, x3, G, adj = -0.8, cex = 0.75)
+})
+```
+如图所示，数据整体区别明显，适合做判别分析
+
+```{r}
+# 2.请说明线性判别的条件，并给出线性判别模型；
+    # 线性判别（等方差）
+with(dataSheet3, {
+    dataSheet3.lda = lda(G ~ x1 + x2 + x3)
+    dataSheet3.pre = predict(dataSheet3.lda)
+    lG3 = dataSheet3.pre$class
+    # 显示结果
+    print(data.frame(G, lG3))
+    tab3 = table(G, lG3)
+    print(diag(prop.table(tab3, 1)))
+    print(sum(diag(prop.table(tab3))))
+    # 绘图
+    plot(dataSheet3.pre$x)
+    text(dataSheet3.pre$x[,1], dataSheet3.pre[,2], lG3, adj = -0.8, cex = 0.75) 
+
+# 3.请使用线性判别模型对数据进行回判，并描述回判结果，以及计算该判别模型的准确率
+    print(predict(dataSheet3.lda, data.frame(x1 = 60, x2 = 1, x3 = 11)))
+})
+```
+准确率 86%
+
+```{r}
+with(dataSheet3, {
+# 4.请建立非线性判别模型，使用该模型对数据进行回判，并描述回判结果，以及计算该判别模型的准确率
+    # 二次判别（异差法）
+    dataSheet3.lda = lda(G ~ x1 + x2 + x3)
+    dataSheet3.pre = predict(dataSheet3.lda)
+    lG3 = dataSheet3.pre$class
+    qd3 = qda(G ~ x1 + x2 + x3)
+    qp3 = predict(qd3)
+    qG3 = qp3$class
+    # 显示结果
+    print(data.frame(G, lG3, qG3))
+    qtab3 = table(G, qG3)
+    print(qtab3)
+    print(sum(diag(prop.table(qtab3))))
+    # 测试判定
+    print(predict(qd3, data.frame(x1 = 60, x2 = 1, x3 = 11)))
+})
+```
+准确率 100%
+
+```{r}
+# 5.比较两种模型的准确率，使用准确率高的判别模型对某公司是否会陷入财务困境进行预判，该公司财务数据为：x1=78.3563，x2=0.8895,x3=1.8001；
+with(dataSheet3, {
+    # 二次判别（异差法）
+    dataSheet3.lda = lda(G ~ x1 + x2 + x3)
+    dataSheet3.pre = predict(dataSheet3.lda)
+    lG3 = dataSheet3.pre$class
+    qd3 = qda(G ~ x1 + x2 + x3)
+    qp3 = predict(qd3)
+    qG3 = qp3$class
+    # 显示结果
+    print(data.frame(G, lG3, qG3))
+    qtab3 = table(G, qG3)
+    print(qtab3)
+    print(sum(diag(prop.table(qtab3))))
+    # 测试判定
+    print(predict(qd3))
+    print(predict(qd3, data.frame(x1 = 78.3563, x2 = 0.8895, x3 = 1.8001)))
+})
+```
+
+得出结果 levels 2 ST公司，会陷入财务困境
