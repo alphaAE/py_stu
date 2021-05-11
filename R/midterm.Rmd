@@ -8,8 +8,8 @@ output: word_document
 
 ## 
 ```{r}
-library(xlsx)
-#library(openxlsx)
+#library(xlsx)
+library(openxlsx)
 dataSheet = read.xlsx("./mvexer5.xlsx", "E3.2", colNames = TRUE, rowNames = TRUE)
 dataSheet
 ```
