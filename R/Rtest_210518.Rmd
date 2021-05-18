@@ -1,0 +1,77 @@
+---
+title: "Rtest_210427"
+author: "ae"
+date: "2021/4/27"
+output: word_document
+---
+
+
+## 6.4 Bayse判别法
+```{r}
+library(xlsx)
+yX = read.xlsx("./mvstats5.xlsx", "d6.3", encoding="UTF-8")
+
+with(yX, {
+    # 先验概率相等的Bayes判别模型
+    yX.lda1 = lda(G3 ~ Q + C + P, prior = c(1, 1, 1) / 3)
+    print(yX.lda1)
+    # 先验概率不相等的Bayes判别模型
+    yX.lda2 = lda(G3 ~ Q + C + P, prior = c(5, 8, 7) / 20)
+    print(yX.lda2)
+
+    # 结果比较
+    pre1 = predict(yX.lda1)
+    pre2 = predict(yX.lda2)
+    print(data.frame(G3, yX.lda1G = pre1$class, yX.lda2G = pre2$class))
+
+    tab1 = table(G3, pre1$class)
+    print(tab1)
+    tab2 = table(G3, pre2$class)
+    print(tab2)
+
+    print(sum(diag(tab1)) / sum(tab1))
+    print(sum(diag(tab2)) / sum(tab2))
+
+    # 两个模型的后验概率
+    print(round(pre1$post * 100, 2))
+    print(round(pre2$post * 100, 2))
+
+    # 样例回判
+    print(predict(yX.lda1, data.frame(Q = 8, C = 7.5, P = 65)))
+    print(predict(yX.lda2, data.frame(Q = 8, C = 7.5, P = 65)))
+
+})
+
+```
+
+
+## 案例6
+```{r}
+library(xlsx)
+library(MASS)
+yX = read.xlsx("./mvcase5.xlsx", "Case6", encoding="UTF-8")
+
+with(yX, {
+    plot(yX[, 2:5], gap = 0)
+    yX.ld = lda(G ~ .,data = yX)
+    print(yX.ld)
+    plot(yX.ld)
+    pre = predict(yX.ld)
+    
+    print(data.frame(yX$G, pre$class, round(pre$x, 3)))
+    tab = table(yX$G, pre$class)
+    print(tab)
+    print(sum(diag(tab)) / sum(tab))
+    print(addmargins(tab))
+
+    # 二次判别
+    yX.qd = qda(G ~ .,data = yX)
+    print(yX.qd)
+    pre2 = predict(yX.qd)
+    tab2 = table(yX$G, pre2$class)
+    print(tab2)
+    print(sum(diag(tab2)) / sum(tab2))
+    print(addmargins(tab2))
+})
+
+```
