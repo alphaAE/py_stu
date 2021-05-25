@@ -1,0 +1,116 @@
+---
+title: "Rtest_210525"
+author: "ae"
+date: "2021/5/25"
+output: word_document
+---
+
+
+## 7.3 系统聚类法
+```{r}
+x1 = c(2.5, 3.0 ,6.0, 6.6, 7.2, 4.0, 4.7, 4.5, 5.5)
+x2 = c(2.1, 2.5, 2.5, 1.5, 3.0 ,6.4, 5.6, 7.9, 6.9)
+plot(x1, x2)
+text(x1, x2, labels = c(1: 9), adj = -0.5)
+X = data.frame(x1, x2)
+```
+
+
+# 9个样品间的距离阵 D
+```{r}
+# 默认Euclidean距离 Q型
+D = dist(X)
+print(D)
+print(min(D))
+
+# 计算新类与当前类的距离 并绘图
+hc = hclust(D, "single");
+print(hc)
+names(hc)
+data.frame(hc$merge, hc$height)
+plot(hc)
+rect.hclust(hc, 3)
+```
+
+# 最长距离法
+```{r}
+# 默认最长距离法
+hc = hclust(D)
+data.frame(hc$merge, hc$height)
+plot(hc)
+rect.hclust(hc, 3)
+# 显示分类结果
+cutree(hc, 9:1)
+
+```
+
+## 例题 7.2
+```{r}
+library(openxlsx)
+d3.1 = read.xlsx('./mvstats5.xlsx', 'd3.1', rowNames = T)
+plot(d3.1, gap = 0)
+D = dist(d3.1)
+print(D)
+```
+
+```{r}
+# 最短距离法
+plot(hclust(D, 'single'))
+```
+
+```{r}
+# 最长距离法
+plot(hclust(D, 'complete'))
+```
+
+```{r}
+# 中间距离法
+plot(hclust(D, 'median'))
+```
+
+```{r}
+# 类平均法
+plot(hclust(D, 'average'))
+```
+
+```{r}
+# 重心法
+plot(hclust(D, 'centroid'))
+```
+
+```{r}
+# 离差平方和法
+plot(hclust(D, 'ward.D'))
+```
+
+```{r}
+# 离差平方和法2
+plot(hclust(D, 'ward.D2'))
+```
+
+综合分析 'ward.D2' 效果较好
+```{r}
+H = hclust(D, 'ward.D2')
+print(H)
+plot(H)
+# 两类框
+rect.hclust(H, 2)
+# 二分结果
+cutree(H, 2)
+```
+
+```{r}
+plot(H)
+# 三类框
+rect.hclust(H, 3)
+# 三分结果
+cutree(H, 3)
+```
+
+```{r}
+plot(H)
+# 四类框
+rect.hclust(H, 4)
+# 四分结果
+cutree(H, 4)
+```

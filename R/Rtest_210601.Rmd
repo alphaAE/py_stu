@@ -1,0 +1,12 @@
+---
+title: "Rtest_210427"
+author: "ae"
+date: "2021/4/27"
+output: word_document
+---
+
+
+## 7.4 快速聚类法
+```{r}
+
+```
