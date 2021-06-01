@@ -1,12 +1,77 @@
 ---
-title: "Rtest_210427"
+title: "Rtest_210601"
 author: "ae"
-date: "2021/4/27"
+date: "2021/6/01"
 output: word_document
 ---
 
 
-## 7.4 快速聚类法
+## 7.4 快速聚类法模拟研究
 ```{r}
+set.seed(123)
+# 均值0，标准差0.3，100x10 正态随机矩阵
+x1 = matrix(rnorm(1000, 0, 0.3), ncol = 10)
+# 均值1，标准差0.3，100x10 正态随机矩阵
+x2 = matrix(rnorm(1000, 1, 0.3), ncol = 10)
+# 形成 200x10 矩阵
+X = rbind(x1, x2)
+```
 
+## 系统聚类结果
+```{r}
+H = hclust(dist(X))
+plot(H)
+rect.hclust(H, 2)
+cutree(H, 2)
+```
+
+## K-means聚类结果
+```{r}
+km = kmeans(X, 2)
+print(km$cluster)
+plot(X, pch=km$cluster)
+```
+
+## 追加样本数量观察结果
+```{r}
+set.seed(123)
+x1_2 = matrix(rnorm(10000, 0, 0.3), ncol = 10)
+x2_2 = matrix(rnorm(10000, 1, 0.3), ncol = 10)
+X_2 = rbind(x1_2, x2_2)
+km_2 = kmeans(X_2, 2)
+plot(X_2, pch=km_2$cluster)
+```
+
+# 案例7
+```{r}
+library(openxlsx)
+Case7 = read.xlsx('./mvcase5.xlsx', 'Case7', rowNames = T)
+head(Case7)
+summary(Case7)
+# 标准化
+Z = scale(Case7)
+boxplot(Z)
+# 系统聚类法
+hc = hclust(dist(Z), 'ward.D2')
+```
+
+```{r}
+# 分2类
+plot(hc)
+rect.hclust(hc, 2)
+cutree(hc, 2)
+```
+
+```{r}
+# 分3类
+plot(hc)
+rect.hclust(hc, 3)
+cutree(hc, 3)
+```
+
+```{r}
+# 分4类
+plot(hc)
+rect.hclust(hc, 4)
+cutree(hc, 4)
 ```
