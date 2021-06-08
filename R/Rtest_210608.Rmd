@@ -1,0 +1,77 @@
+---
+title: "Rtest_210608"
+author: "ae"
+date: "2021/6/08"
+output: word_document
+---
+
+
+# 8.1 主成分分析
+```{r}
+library(shape)
+x1 = c(147, 171, 175, 159, 155, 152, 158, 154, 164, 168, 166, 159, 164, 177)
+x2 = c(32, 57, 64, 41, 38, 35, 44, 41, 54, 57, 49, 47, 46, 63)
+# 相关系数
+cor(x1, x2)
+
+plot(x1, x2, xlim=c(145, 180), ylim=c(25, 75))
+lines(c(146, 178), c(30, 66), lwd=2)
+lines(c(163, 166), c(54, 47))
+
+lines(getellipse(24, 3, mid=c(162, 48), angle=48), lty=3)
+
+```
+
+# 系统聚类结果
+```{r}
+X = data.frame(x1 ,x2)
+# 协方差阵
+S = cov(X);
+print(S)
+# 相关系数阵
+R = cor(X)
+print(R)
+```
+
+```{r}
+# 协方差阵的奇异值分解
+svd(S)
+```
+
+```{r}
+# 相关系数阵的奇异值分解
+svd(R)
+```
+
+```{r}
+# 主成分分析
+pc = princomp(X)
+print(pc)
+# 主成分对象
+names(pc)
+# 主成分方差
+pc$sdev
+# 主成分系数
+pc$loadings
+# 主成分得分
+pc$scores
+plot(pc$scores, asp=1)
+abline(h=0, v=0, lty=3)
+```
+
+```{r}
+# 验证主成分各不相关
+cor(pc$scores)
+cov(pc$scores)
+```
+
+```{r}
+# 主成分信息图
+biplot(pc$scores, pc$loadings)
+abline(h=0, v=0, lty=3)
+```
+
+```{r}
+# 方差贡献率
+summary(pc)
+```
