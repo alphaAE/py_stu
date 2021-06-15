@@ -1,0 +1,45 @@
+---
+title: "Rtest_210608"
+author: "ae"
+date: "2021/6/08"
+output: word_document
+---
+
+
+# 8.3.1 主成分分析改进算法
+```{r}
+source('./msaR.r')
+
+library(shape)
+x1 = c(147, 171, 175, 159, 155, 152, 158, 154, 164, 168, 166, 159, 164, 177)
+x2 = c(32, 57, 64, 41, 38, 35, 44, 41, 54, 57, 49, 47, 46, 63)
+
+X = data.frame(x1 ,x2)
+msa.pca(X)
+msa.pca(X, cor=T)
+```
+
+# 8.3.2 主成分分析过程
+```{r}
+library(openxlsx)
+library(MASS)
+yX = read.xlsx("./mvstats5.xlsx", "d3.1", rowNames=T)
+yX.pca = msa.pca(yX, cor=T)
+print(yX.pca)
+```
+
+```{r}
+# 绘制双重信息图
+biplot(yX.pca$scores, yX.pca$loadings)
+abline(h=0, v=0, lty=3)
+```
+
+# 案例 8
+```{r}
+case8 = read.xlsx("./mvcase5.xlsx", "Case8", rowNames=T)
+print(case8)
+# 系统聚类图
+plot(hclust(dist(scale(case8))))
+msa.pca(case8, cor=T)
+
+```
