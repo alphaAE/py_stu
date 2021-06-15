@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js – The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<a href="#">
+						<img src="./icon.png" alt="reveal.js logo" style="height: 180px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+					</a>
+					<h3>镜头矫正工具</h3>
+					<p>
+						<small>制作： <a href="#">第π小组</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>项目背景</h2>
+					<p>
+						本示例将会开发一个镜头矫正工具，用户可以通过程序修复拍摄图片的暗角问题
+					</p>
+					<img src="./img1.jpg" alt="reveal.js logo" style="height: 400px; margin: 0 auto 0 auto; background: transparent;" class="demo-logo">
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>问题分析</h2>
+						<p>实质是图片这一多维数据的通道数值处理</p>
+						<br>
+						<ol>
+							<li>UI交互与展示</li>
+							<li>图片多维数据处理</li>
+						</ol>
+						<!-- <br>
+						<a href="#" class="navigate-down">
+							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="178" height="238" data-src="https://static.slid.es/reveal/arrow.png" alt="Down arrow">
+						</a> -->
+					</section>
+					<section>
+						<h2>UI交互与展示</h2>
+						<img src="./qt-logo.svg" alt="reveal.js logo" style="height: 200px; margin: 10px auto 0 auto; background: transparent;" class="demo-logo">
+						<p>采用 Qt5 作为图形界面</p>
+						<ol>
+							<li>布局（horizontalLayout, verticalLayout）</li>
+							<li>控件（action, label, horizontalSlider）</li>
+							<li>对话框（QFileDialog, QDialog, QMessageBox）</li>
+						</ol>
+<!-- 
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|3-8|13-23"><script type="text/template">
+def __init__(self):
+  # 初始化菜单映射表
+  self.menuList = [
+    {"id": 1, "name": "显示当前超市商品清单", "fun": self.showProductList},
+    {"id": 2, "name": "显示用户购物清单", "fun": self.showShoppingList},
+    {"id": 3, "name": "添加商品", "fun": self.addProduct},
+    ...
+  ]
+# 程序主循环
+def runMainloop(self):
+  while self.programSwitch:
+  # 打印菜单并等待输入
+  try:
+    userInId = int(input("\n键入[功能序号]："))
+  except Exception:
+    self.cls()
+    print("\n输入有误！")
+    continue
+  for item in self.menuList:
+    if item["id"] == userInId:
+      execution = True
+      item["fun"]()
+      break
+  # 无对应项输出
+  if execution is False:
+    self.cls()
+    print("无对应选项")
+    ...
+						</script></code></pre> -->
+						<!-- <br>
+						<a href="#/2">
+							<img class="r-frame" style="background: rgba(255,255,255,0.1); transform: rotate(180deg);" width="178" height="238" data-src="https://static.slid.es/reveal/arrow.png" alt="Up arrow">
+						</a> -->
+					</section>
+					<section>
+						<h2>数据处理部分</h2>
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|3-10|12-28|29-39">
+# 暗角处理
+def vignettingImg(cvimgOriginal, weight):
+    cvimg = np.copy(cvimgOriginal)
+    rows, cols, chunnel = cvimg.shape
+    # 中心点
+    center = ImgUtils.centerPoint(cvimg)
+    # 最大半径 即圈住图像的最小圆半径
+    maxRadian = ImgUtils.dist([0, 0], center)
+    # 最小半径 即约定范围
+    minRadian = maxRadian * (1 - abs(weight))
+    # 权重正值标记 权重为正减淡 为负加深
+    if weight >= 0:
+        for r in range(rows):
+            for c in range(cols):
+                # 当前距中心点距离
+                tempDist = ImgUtils.dist([r, c], center)
+                # 验证约定范围
+                if tempDist > minRadian:
+                    # 标准化 后得到点的权重值 (1 - 2)
+                    tempWeight = 1 + (tempDist - minRadian) / (
+                        maxRadian - minRadian) * abs(weight)
+                # 遍历防止越过 255 最大值
+                for i in [0, 1, 2]:
+                    temp = cvimg[r, c, i] * tempWeight
+                    if temp > 255:
+                        cvimg[r, c, i] = 255
+                    else:
+                        cvimg[r, c, i] = temp
+    else:
+        for r in range(rows):
+            for c in range(cols):
+                tempDist = ImgUtils.dist([r, c], center)
+                if tempDist > minRadian:
+                    # 标准化 后得到点的反向权重值 (0 - 1)
+                    tempWeight = 1 - (tempDist - minRadian) / (
+                        maxRadian - minRadian) * abs(weight)
+                    cvimg[r, c] = cvimg[r, c] * [
+                        tempWeight, tempWeight, tempWeight
+                    ]
+    return cvimg
+						</code></pre>
+						<p>通过遍历每个像素点，计算像素位置应该叠加的明暗值</p>
+					</section>
+
+				</section>
+
+				<section id="transitions">
+					<h2>功能流程&展示</h2>
+					<p>暗角处理功能流程</p>
+					<ol>
+						<li><a href="#/transitions">选择打开图片</a></li>
+						<li><a href="#/transitions">创建图片代理文件（程序处理）</a></li>
+						<li><a href="#/transitions">预处理图片效果（程序处理）</a></li>
+						<li><a href="#/transitions">用户处理图片</a></li>
+						<li><a href="#/transitions">保存图片</a></li>
+						<li><a href="#/transitions">使用当前参数处理原图片（程序处理）</a></li>
+						<li><a href="#/transitions">保存数据至硬盘（程序处理）</a></li>
+					</ol>
+				</section>
+
+				<section>
+					<section id="fragments">
+						<h2>总结</h2>
+						<p>软件开发流程部分的贯通...</p>
+						<p class="fragment">... Python语言开发基础 ...</p>
+						<p><span class="fragment">... 综合能力 ...</span></p>
+
+						<aside class="notes">
+							这是注释
+						</aside>
+					</section>
+					<section>
+						<h2>更多!</h2>
+						<p>
+							<span style="display: inline-block;" class="fragment fade-right">优化处理算法, </span>
+							<span style="display: inline-block;" class="fragment fade-up">QT图形界面异步, </span>
+							<!-- <span style="display: inline-block;" class="fragment fade-down">网页展示, </span> -->
+							<span style="display: inline-block;" class="fragment fade-left">镜头畸变矫正</span>
+						</p>
+					</section>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>谢谢</h1>
+					<p>
+						- <a href="#/5">尝试在 Jupyter 运行</a> <br>
+						- <a href="https://github.com/alphaAE/py_stu/tree/master">源代码 &amp; 文档</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>
