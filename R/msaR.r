@@ -49,7 +49,7 @@ msa.cor.test<-function(X,diag=TRUE){
   p=ncol(X);
   if(diag){
     tp=matrix(1,p,p);
-    for(i in 1:p){
+    for(i in 1:p){pca
       for(j in 1:i) tp[i,j]=cor.test(X[,i],X[,j])$stat;
       for(j in i:p) tp[i,j]=cor.test(X[,i],X[,j])$p.value;
     }
