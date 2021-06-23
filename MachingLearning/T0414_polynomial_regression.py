@@ -17,6 +17,7 @@ y = data[:, 1].reshape((-1, 1))
 # y_predict = linear_model.predict(X)
 # print("MSE:",mean_squared_error(y,y_predict))
 
+# degree：控制多项式的次数
 poly = PolynomialFeatures(degree=3)
 x_train = poly.fit_transform(X)
 
