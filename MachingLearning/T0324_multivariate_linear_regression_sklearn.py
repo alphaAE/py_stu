@@ -1,3 +1,12 @@
+'''
+       _       _              _    _____
+  __ _| |_ __ | |__   __ _   / \  | ____|
+ / _` | | '_ \| '_ \ / _` | / _ \ |  _|
+| (_| | | |_) | | | | (_| |/ ___ \| |___
+ \__,_|_| .__/|_| |_|\__,_/_/   \_\_____|
+        |_|
+'''
+
 import numpy as np
 from numpy.linalg import inv
 import matplotlib.pyplot as plt
@@ -37,3 +46,4 @@ plt.show()
 
 with open("./MachingLearning/model.pickle", "wb") as f:
     pickle.dump(model, f)
+
