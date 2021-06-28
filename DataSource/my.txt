@@ -1,154 +1,83 @@
-| 模块 | 命令 | 别名 | 描述 | 用法 |
-| --- | --- | --- | --- | --- |
-| Essentials | editsign | sign, esign, eeditsign | Edits a sign in the world. | `/<command> <set/clear/copy/paste> [line number] [text]` |
-| Essentials | repair | fix, efix, erepair | Repairs the durability of one or all items. | `/<command> [hand|all]` |
-| Essentials | msgtoggle | emsgtoggle | Blocks receiving all private messages. | `/<command> [player] [on|off]` |
-| Essentials | setjail | esetjail, createjail, ecreatejail | Creates a jail where you specified named \[jailname\]. | `/<command> <jailname>` |
-| Essentials | settpr | \[esettpr, settprandom, esettprandom\] | Set the random teleport location and parameters. | `/<command> [center|minrange|maxrange] [value]` |
-| Essentials | help | ehelp | Views a list of available commands. | `/<command> [search term] [page]` |
-| Essentials | clearinventoryconfirmtoggle | eclearinventoryconfirmtoggle, clearinventoryconfirmoff, eclearinventoryconfirmoff, clearconfirmoff, eclearconfirmoff, clearconfirmon, eclearconfirmon, clearconfirm, eclearconfirm | Toggles whether you are prompted to confirm inventory clears. | `/<command>` |
-| Essentials | mute | emute, silence, esilence | Mutes or unmutes a player. | `/<command> <player> [datediff]` |
-| Essentials | spawner | changems, echangems, espawner, mobspawner, emobspawner | Change the mob type of a spawner. | `/<command> <mob> [delay]` |
-| Essentials | deljail | edeljail, remjail, eremjail, rmjail, ermjail | Removes a jail. | `/<command> <jailname>` |
-| Essentials | powertool | epowertool, pt, ept | Assigns a command to the item in hand. Use 'c:' as the command to make a chat macro. Use 'a:' to append multiple commands. Use 'r:' to remove a single command. Use 'l:' to list all power tools Use 'd:' to remove all power tools | `/<command> [l:|a:|r:|c:|d:][command] [arguments] ({player} can be replaced by name of a clicked player.)` |
-| Essentials | weather | rain, erain, sky, esky, storm, estorm, sun, esun, eweather | Sets the weather. | `/<command> <storm/sun> [duration]` |
-| Essentials | gc | lag, elag, egc, mem, emem, memory, ememory, uptime, euptime, tps, etps, entities, eentities | Reports memory, uptime and tick info. | `/<command> [all]` |
-| Essentials | delhome | edelhome, remhome, eremhome, rmhome, ermhome | Removes a home. | `/<command> [player:]<name>` |
-| Essentials | enderchest | echest, eechest, eenderchest, endersee, eendersee, ec, eec | Lets you see inside an enderchest. | `/<command> [player]` |
-| Essentials | powertooltoggle | epowertooltoggle, ptt, eptt, pttoggle, epttoggle | Enables or disables all current powertools. | `/<command>` |
-| Essentials | kickall | ekickall | Kicks all players off the server except the issuer. | `/<command> [reason]` |
-| Essentials | speed | flyspeed, eflyspeed, fspeed, efspeed, espeed, walkspeed, ewalkspeed, wspeed, ewspeed | Change your walk or fly speed. | `/<command> [type] <speed> [player]` |
-| Essentials | tpall | etpall | Teleport all online players to another player. | `/<command> <player>` |
-| Essentials | suicide | esuicide | Causes you to perish. | `/<command>` |
-| Essentials | whois | ewhois | Displays player information | `/<command> <nickname|playername>` |
-| Essentials | essentials | eessentials, ess, eess, essversion | Reloads essentials. | `/<command>` |
-| Essentials | tptoggle | etptoggle | Blocks all forms of teleportation. | `/<command> [player] [on|off]` |
-| Essentials | disposal | edisposal, trash, etrash | Opens a portable disposal menu. | `/<command>` |
-| Essentials | top | etop | Teleport to the highest block at your current position. | `/<command>` |
-| Essentials | gamemode | adventure, eadventure, adventuremode, eadventuremode, creative, eecreative, creativemode, ecreativemode, egamemode, gm, egm, gma, egma, gmc, egmc, gms, egms, gmt, egmt, survival, esurvival, survivalmode, esurvivalmode, gmsp, sp, egmsp, spec, spectator | Change player gamemode. | `/<command> <survival|creative|adventure|spectator> [player]` |
-| Essentials | condense | econdense, compact, ecompact, blocks, eblocks, toblocks, etoblocks | Condenses items into a more compact blocks. | `/<command> [<itemname>|<id>|hand|inventory]` |
-| Essentials | tp | tele, etele, teleport, eteleport, etp, tp2p, etp2p | Teleport to a player. | `/<command> <player> [otherplayer]` |
-| Essentials | tpoffline | otp, offlinetp, tpoff, tpoffline | Teleport to a player's last known logout location | `/<command> <player>` |
-| Essentials | setworth | esetworth | Set the sell value of an item. | `/<command> [itemname|id] <price>` |
-| Essentials | spawnmob | mob, emob, spawnentity, espawnentity, espawnmob | Spawns a mob. | `/<command> <mob>[:data][,<mount>[:data]] [amount] [player]` |
-| Essentials | book | ebook | Allows reopening and editing of sealed books. | `/<command> [title|author [name]]` |
-| Essentials | time | day, eday, night, enight, etime | Display/Change the world time. Defaults to current world. | `/<command> [day|night|dawn|17:30|4pm|4000ticks] [worldname|all]` |
-| Essentials | tpaall | etpaall | Requests all players online to teleport to you. | `/<command> <player>` |
-| Essentials | mail | email, eemail, memo, ememo | Manages inter-player, intra-server mail. | `/<command> [read|clear|send [to] [message]|sendall [message]]` |
-| Essentials | hat | ehat, head, ehead | Get some cool new headgear. | `/<command> [remove]` |
-| Essentials | worth | eprice, price, eworth | Calculates the worth of items in hand or as specified. | `/<command> <<itemname>|<id>|hand|inventory|blocks> [-][amount]` |
-| Essentials | kick | ekick | Kicks a specified player with a reason. | `/<command> <player> [reason]` |
-| Essentials | more | emore | Fills the item stack in hand to specified amount, or to maximum size if none is specified. | `/<command> [amount]` |
-| Essentials | info | about, eabout, ifo, eifo, einfo, inform, einform, news, enews | Shows information set by the server owner. | `/<command> [chapter] [page]` |
-| Essentials | tpahere | etpahere | Request that the specified player teleport to you. | `/<command> <player>` |
-| Essentials | realname | erealname | Displays the username of a user based on nick. | `/<command> <nickname>` |
-| Essentials | bigtree | ebigtree, largetree, elargetree | Spawn a big tree where you are looking. | `/<command> <tree|redwood|jungle>` |
-| Essentials | rest | erest | Rests you or the given player. | `/<command> [player]` |
-| Essentials | rules | erules | Views the server rules. | `/<command> [chapter] [page]` |
-| Essentials | recipe | formula, eformula, method, emethod, erecipe, recipes, erecipes | Displays how to craft items. | `/<command> <item> [number]` |
-| Essentials | sethome | esethome, createhome, ecreatehome | Set home to your current location. | `/<command> [player:]<name>` |
-| Essentials | pweather | playerweather, eplayerweather, epweather | Adjust a player's weather | `/<command> [list|reset|storm|sun|clear] [player|*]` |
-| Essentials | setwarp | createwarp, ecreatewarp, esetwarp | Creates a new warp. | `/<command> <warp>` |
-| Essentials | delwarp | edelwarp, remwarp, eremwarp, rmwarp, ermwarp | Deletes the specified warp. | `/<command> <warp>` |
-| Essentials | warpinfo | ewarpinfo | Finds location information for a specified warp. | `/<command> <warp>` |
-| Essentials | warp | ewarp, warps, ewarps | List all warps or warp to the specified location. | `/<command> <pagenumber|warp> [player]` |
-| Essentials | break | ebreak | Breaks the block you are looking at. | `/<command>` |
-| Essentials | msg | w, m, t, pm, emsg, epm, tell, etell, whisper, ewhisper | Sends a private message to the specified player. | `/<command> <to> <message>` |
-| Essentials | compass | ecompass, direction, edirection | Describes your current bearing. | `/<command>` |
-| Essentials | world | eworld | Switch between worlds. | `/<command> [world]` |
-| Essentials | me | action, eaction, describe, edescribe, eme | Describes an action in the context of the player. | `/<command> <description>` |
-| Essentials | payconfirmtoggle | epayconfirmtoggle, payconfirmoff, epayconfirmoff, payconfirmon, epayconfirmon, payconfirm, epayconfirm | Toggles whether you are prompted to confirm payments. | `/<command>` |
-| Essentials | ext | eext, extinguish, eextinguish | Extinguish players. | `/<command> [player]` |
-| Essentials | broadcastworld | bcw, ebcw, bcastw, ebcastw, ebroadcastworld, shoutworld, eshoutworld | Broadcasts a message to a world. | `/<command> <world> <msg>` |
-| Essentials | toggleshout | etoggleshout | Toggles whether you are talking in shout mode | `/<command> [player] [on|off]` |
-| Essentials | togglejail | jail, ejail, tjail, etjail, etogglejail, unjail, eunjail | Jails/Unjails a player, TPs them to the jail specified. | `/<command> <player> <jailname> [datediff]` |
-| Essentials | jails | ejails | List all jails. | `/<command>` |
-| Essentials | list | elist, online, eonline, playerlist, eplayerlist, plist, eplist, who, ewho | List all online players. | `/<command> [group]` |
-| Essentials | remove | eremove, butcher, ebutcher, killall, ekillall, mobkill, emobkill | Removes entities in your world. | `/<command> <all|tamed|named|drops|arrows|boats| minecarts|xp|paintings|itemframes|endercrystals| monsters|animals|ambient|mobs|[mobType]> [radius|world]` |
-| Essentials | lightning | elightning, shock, eshock, smite, esmite, strike, estrike, thor, ethor | The power of Thor. Strikes at the cursor or a player. | `/<command> [player] [power]` |
-| Essentials | ignore | eignore, unignore, eunignore, delignore, edelignore, remignore, eremignore, rmignore, ermignore | Ignore or unignore other players. | `/<command> <player>` |
-| Essentials | item | i, eitem, ei | Spawn an item. | `/<command> <item|numeric> [amount [itemmeta...]]` |
-| Essentials | near | enear, nearby, enearby | Lists the players near by or around a player. | `/<command> [playername] [radius]` |
-| Essentials | firework | efirework | Allows you to modify a stack of fireworks. | `/<command> <<meta param>|power [amount]|clear|fire [amount]>` |
-| Essentials | invsee | einvsee | See and/or edit the inventory of other players. | `/<command> <player> [armor]` |
-| Essentials | balancetop | ebalancetop, baltop, ebaltop | Lists players by top balances. | `/<command> <page>` |
-| Essentials | ban | eban | Bans a player. | `/<command> <player> [reason]` |
-| Essentials | kill | ekill | Kills specified player. | `/<command> <player>` |
-| Essentials | balance | bal, ebal, ebalance, money, emoney | States the current balance of a player. | `/<command> [player]` |
-| Essentials | enchant | eenchant, enchantment, eenchantment | Enchants the item the user is holding. | `/<command> <enchantmentname> [level]` |
-| Essentials | banip | ebanip | Bans an IP address. | `/<command> <address>` |
-| Essentials | socialspy | esocialspy | Toggles if you can see msg/mail commands in chat. | `/<command> [player] [on|off]` |
-| Essentials | workbench | craft, ecraft, wb, ewb, wbench, ewbench, eworkbench | Opens up a workbench. | `/<command>` |
-| Essentials | anvil | eanvil | Opens up an Anvil. | `/<command>` |
-| Essentials | cartographytable | ecartographytable, carttable, ecarttable | Opens up a cartography table. | `/<command>` |
-| Essentials | grindstone | egrindstone | Opens up a grindstone. | `/<command>` |
-| Essentials | loom | eloom | Opens up a loom. | `/<command>` |
-| Essentials | smithingtable | esmithingtable, smithtable, esmithtable | Opens up a smithing table. | `/<command>` |
-| Essentials | stonecutter | estonecutter | Opens up a stonecutter. | `/<command>` |
-| Essentials | motd | emotd | Views the Message Of The Day. | `/<command> [chapter] [page]` |
-| Essentials | ptime | playertime, eplayertime, eptime | Adjust player's client time. Add @ prefix to fix. | `/<command> [list|reset|day|night|dawn|17:30|4pm|4000ticks] [player|*]` |
-| Essentials | give | egive | Give a player an item. | `/<command> <player> <item|numeric> [amount [itemmeta...]]` |
-| Essentials | tree | etree | Spawn a tree where you are looking. | `/<command> <tree|birch|redwood|redmushroom| brownmushroom|jungle|junglebush|swamp>` |
-| Essentials | tpacancel | etpacancel | Cancel all outstanding teleport requests. Specify \[player\] to cancel requests with them. | `/<command> [player]` |
-| Essentials | sudo | esudo | Make another user perform a command. | `/<command> <player> <command [args]>` |
-| Essentials | back | eback, return, ereturn | Teleports you to your location prior to tp/spawn/warp. | `/<command>` |
-| Essentials | jump | j, ej, ejump, jumpto, ejumpto | Jumps to the nearest block in the line of sight. | `/<command>` |
-| Essentials | fly | efly | Take off, and soar! | `/<command> [player] [on|off]` |
-| Essentials | potion | epotion, elixer, eelixer | Adds custom potion effects to a potion. | `/<command> <clear|apply|effect:<effect> power:<power> duration:<duration>>` |
-| Essentials | seen | eseen | Shows the last logout time of a player. | `/<command> <playername>` |
-| Essentials | home | ehome, homes, ehomes | Teleport to your home. | `/<command> [player:]<name>` |
-| Essentials | vanish | v, ev, evanish | Hide yourself from other players. | `/<command> [player] [on|off]` |
-| Essentials | tpdeny | etpdeny, tpno, etpno | Reject a teleport request. | `/<command>` |
-| Essentials | tpohere | etpohere | Teleport here override for tptoggle. | `/<command> <player>` |
-| Essentials | getpos | eposition | Get your current coordinates or those of a player. | `/<command> [player]` |
-| Essentials | god | tgm | Enables your godly powers. | `/<command> [player] [on|off]` |
-| Essentials | ping | echo, eecho, eping, pong, epong | Pong! | `/<command>` |
-| Essentials | helpop | eamsg | Message online admins. | `/<command> <message>` |
-| Essentials | skull | head | Set the owner of a player skull | `/<command> [owner]` |
-| Essentials | broadcast | ebcast, bc, bcast, ebc | Broadcasts a message to the entire server. | `/<command> <msg>` |
-| Essentials | clearinventory | ci, eci, clean, eclean, clear, eclear, clearinvent, eclearinvent, eclearinventory | Clear all items in your inventory. | `/<command> [player|*] [item[:<data>]|*|**] [amount]` |
-| Essentials | unlimited | eul | Allows the unlimited placing of items. | `/<command> <list|item|clear> [player]` |
-| Essentials | antioch | tnt | A little surprise for operators. | `/<command> [message]` |
-| Essentials | fireball | fireskull | Throw a fireball or other assorted projectiles. | `/<command> [fireball|small|large|arrow|skull|egg|snowball|expbottle|dragon|splashpotion|lingeringpotion|trident] [speed]` |
-| Essentials | tpa | tpask | Request to teleport to the specified player. | `/<command> <player>` |
-| Essentials | createkit | ck | Create a kit in game! | `/<command> <kitname> <delay>` |
-| Essentials | kitreset | ekitreset, kitr, ekitr, resetkit, eresetkit | Resets the cooldown on the specified kit. | `/<command> <kit> [player]` |
-| Essentials | depth | eheight | States current depth | `/depth` |
-| Essentials | paytoggle | payon | Toggles whether you are accepting payments. | `/<command>` |
-| Essentials | itemdb | eitemdb | Searches for an item. | `/<command> <item>` |
-| Essentials | itemlore | lore, elore, ilore, eilore, eitemlore | Edit the lore of an item. | `/<command> <add/set/clear> [text/line] [text]` |
-| Essentials | itemname | iname, einame, eitemname, itemrename, irename, eitemrename, eirename | Renames the item your currently holding. Leave name empty to reset. You can add in color codes when you have permission to. | `/<command> [name]` |
-| Essentials | afk | eafk, away, eaway | Marks you as away-from-keyboard. | `/<command> [player/message...]` |
-| Essentials | backup | ebackup | Runs the backup if configured. | `/<command>` |
-| Essentials | burn | eburn | Set a player on fire. | `/<command> <player> <seconds>` |
-| Essentials | customtext |  | Allows you to create custom text commands. | `/<alias> - Define in bukkit.yml` |
-| Essentials | eco | eeco,economy,eeconomy | Manages the server economy. | `/<command> <give|take|set|reset> <player> <amount>` |
-| Essentials | exp | eexp, xp | Give, set or look at a players exp. | `/<command> [show|set|give] [playername [amount]]` |
-| Essentials | feed | eat,eeat,efeed | Satisfy the hunger. | `/<command> [player]` |
-| Essentials | heal | eheal | Heals you or the given player. | `/<command> [player]` |
-| Essentials | kit | ekit,kits,ekits | Obtains the specified kit or views all available kits. | `/<command> [kit] [player]` |
-| Essentials | kittycannon | ekittycannon | Throw an exploding kitten at your opponent. | `/<command>` |
-| Essentials | beezooka | ebeezooka, beecannon, ebeecannon | Throw an exploding bee at your opponent. | `/<command>` |
-| Essentials | nick | enick,nickname,enickname | Change your nickname or that of another player. | `/<command> [player] <nickname|off>` |
-| Essentials | nuke | enuke | May death rain upon them. | `/<command> [player]` |
-| Essentials | pay | epay | Pays another player from your balance. | `/<command> <player> <amount>` |
-| Essentials | r | er,reply,ereply | Quickly reply to the last player to message you. | `/<command> <message>` |
-| Essentials | rtoggle | ertoggle, replytoggle, ereplytoggle | Change whether the recipient of the reply is last recipient or last sender. | `/<command> [player] [on|off]` |
-| Essentials | sell | esell | Sells the item currently in your hand. | `/<command> <<itemname>|<id>|hand|inventory|blocks> [-][amount]` |
-| Essentials | showkit | kitpreview,preview,kitshow | Show contents of a kit. | `/<command> <kitname>` |
-| Essentials | tempban | etempban | Temporary ban a user. | `/<command> <playername> <datediff> <reason>` |
-| Essentials | thunder | ethunder | Enable/disable thunder. | `/<command> <true/false> [duration]` |
-| Essentials | tpaccept | etpaccept,tpyes,etpyes | Accepts a teleport request. | `/<command> [otherplayer]` |
-| Essentials | tphere | s,etphere | Teleport a player to you. | `/<command> <player>` |
-| Essentials | tpohere | etpohere | Teleport here override for tptoggle. | `/<command> <player>` |
-| Essentials | tppos | etppos | Teleport to coordinates. | `/<command> <x> <y> <z> [yaw] [pitch] [world]` |
-| Essentials | tpr | etpr, tprandom, etprandom | Teleport randomly. | `/<command>` |
-| Essentials | unban | pardon,eunban,epardon | Unbans the specified player. | `/<command> <player>` |
-| Essentials | unbanip | eunbanip,pardonip,epardonip | Unbans the specified IP address. | `/<command> <address>` |
-| Essentials | tpauto | etpauto | Automatically accept teleportation requests. | `/<command> <player>` |
-| Essentials | delkit |  | Delete a given kit | `/<command> <kitname>` |
-| EssentialsSpawn | setspawn | esetspawn | Set the spawnpoint to your current position. | `/<command> <group>` |
-| EssentialsSpawn | spawn | espawn | Teleport to the spawnpoint. | `/<command> [player]` |
-| EssentialsXMPP | setxmpp |  | Set your xmpp address. | `/<command> <address>` |
-| EssentialsXMPP | xmpp |  | Send a message to a player. | `/<command> <player> <message>` |
-| EssentialsXMPP | xmppspy |  | Toggle xmpp spy for all messages. | `/<command> <player>` |
+| 命令 | 参数 | 描述 |
+| --- | --- | --- |
+| /npc | _None_ | Show basic NPC information |
+| /npc age | _\[age\] (-l)_ | Set the age of a NPC |
+| /npc anchor | _(--save \[name\]/--assume \[name\]/--remove \[name\]) (-a)(-c)_ | Changes/Saves/Lists NPC's location anchor(s) |
+| /npc armorstand | _\--visible \[visible\] --small \[small\] --gravity \[gravity\] --arms \[arms\] --baseplate \[baseplate\]_ | Edit armorstand properties |
+| /npc bee | _(-s/-n) --anger anger_ | Sets bee modifiers |
+| /npc bossbar | _\--color \[color\] --title \[title\] --visible \[visible\] --flags \[flags\]_ | Edit bossbar properties |
+| /npc cat | _(-s/-n/-l) --type type --ccolor collar color_ | Sets cat modifiers |
+| /npc collidable | None | Toggles an NPC's collidability |
+| /npc command | _(add \[command\] / remove \[id\] / permissions \[permissions\] / sequential) (-l\[eft\]/-r\[ight\]) (-p\[layer\] -o\[p\]), --cooldown \[seconds\] --delay \[ticks\] --permissions \[perms\] --n \[max # of uses\]_ | Controls commands which will be run when clicking on an NPC |
+| /npc controllable | _(-m(ount),-y,-n,-o)_ | Toggles whether the NPC can be ridden and controlled |
+| /npc copier | None | Toggle the NPC copier |
+| /npc copy | _(--name newname)_ | Copies an NPC |
+| /npc create | _\[name\] ((-b,u) --at \[x:y:z:world\] --type \[type\] --trait \['trait1, trait2...'\] --b \[behaviours\])_ | Create a new NPC |
+| /npc despawn | _(id)_ | Despawn a NPC |
+| /npc enderman | _\-a\[ngry\]_ | Set enderman modifiers |
+| /npc equip | None | Toggle the equipment editor |
+| /npc flyable | _(true/false)_ | Toggles or sets an NPC's flyable status |
+| /npc follow | _(player name) (-p\[rotect\])_ | Toggles NPC following you |
+| /npc fox | _\--type type --sleeping \[true/false\] --sitting \[true/false\] --crouching \[true/false\]_ | Sets fox modifiers |
+| /npc gamemode | _\[gamemode\]_ | Changes the gamemode |
+| /npc glowing | _\--color \[minecraft chat color\]_ | Toggles an NPC's glowing status |
+| /npc gravity | None | Toggles gravity |
+| /npc hologram | _add \[text\] / set \[line #\] \[text\] / remove \[line #\] / clear / lineheight \[height\]_ | Controls NPC hologram text |
+| /npc horse | _(--color color) (--type type) (--style style) (-cb)_ | Sets horse and horse-like entity modifiers |
+| /npc id | None | Sends the selected NPC's ID to the sender |
+| /npc inventory | None | Show's an NPC's inventory |
+| /npc item | _\[item\] (data)_ | Sets the NPC's item |
+| /npc leashable | None | Toggles leashability |
+| /npc list | _(page) ((-a) --owner (owner) --type (type) --char (char) --registry (name))_ | List NPCs |
+| /npc llama | _(--color color) (--strength strength)_ | Sets llama modifiers |
+| /npc lookclose | _\--randomlook \[true/false\] --randompitchrange \[min,max\] --randomyawrange \[min,max\]_ | Toggle whether a NPC will look when a player is near |
+| /npc mcow | _(--variant \[variant\])_ | Sets mushroom cow modifiers. |
+| /npc metadata | _set/get/remove \[key\] (value) (-t(emporary))_ | Manages NPC metadata |
+| /npc minecart | _(--item item\_name(:data)) (--offset offset)_ | Sets minecart item |
+| /npc mount | _(--onnpc <npc id>) (-c (ancel))_ | Mounts a controllable NPC |
+| /npc moveto | _x:y:z:world / x y z world_ | Teleports a NPC to a given location |
+| /npc name | None | Toggle nameplate visibility |
+| /npc ocelot | _(--type type) (-s(itting), -n(ot sitting))_ | Set the ocelot type of an NPC and whether it is sitting |
+| /npc owner | _\[name\]_ | Set the owner of an NPC |
+| /npc panda | _\--gene (main gene) --hgene (hidden gene) -s(itting)_ | Sets panda modifiers |
+| /npc parrot | _(--variant variant)_ | Sets parrot modifiers |
+| /npc passive | _(--set \[true/false\])_ | Sets whether an NPC damages other entities or not |
+| /npc path | None | Toggle the waypoint editor |
+| /npc pathopt | _\--avoid-water \[true/false\] --stationary-ticks \[ticks\] --attack-range \[range\] --distance-margin \[margin\] --path-distance-margin \[margin\] --use-new-finder \[true/false\]_ | Sets an NPC's pathfinding options |
+| /npc pathrange | _\[range\]_ | Sets an NPC's pathfinding range |
+| /npc phantom | _(--size size)_ | Sets phantom modifiers |
+| /npc playerlist | _(-a,r)_ | Sets whether the NPC is put in the playerlist |
+| /npc pose | _(--save \[name\] (-d)/--assume \[name\]/--remove \[name\]/--default \[name\]) (-a)_ | Changes/Saves/Lists NPC's head pose(s) |
+| /npc power | None | Toggle a creeper NPC as powered |
+| /npc profession | _\[profession\]_ | Set a NPC's profession |
+| /npc pufferfish | _(--state state)_ | Sets pufferfish modifiers |
+| /npc rabbittype | _\[type\]_ | Set the Type of a Rabbit NPC |
+| /npc remove | _(all/id/name/ --owner \[owner\] / --eid \[entity uuid\])_ | Remove a NPC |
+| /npc rename | _\[name\]_ | Rename a NPC |
+| /npc respawn | _\[delay in ticks\]_ | Sets an NPC's respawn delay in ticks |
+| /npc scoreboard | _\--addtag \[tags\] --removetag \[tags\]_ | Controls an NPC's scoreboard |
+| /npc script | _\--add \[files\] --remove \[files\]_ | Controls an NPC's scripts |
+| /npc select | _\[id/name\] (--r range)_ | Select a NPC with the given ID or name |
+| /npc sheep | _(--color \[color\]) (--sheared \[sheared\])_ | Sets sheep modifiers |
+| /npc shulker | _(--peek \[peek\] --color \[color\])_ | Sets shulker modifiers. |
+| /npc size | _\[size\]_ | Sets the NPC's size |
+| /npc skin | _(-c -l(atest)) \[name\] (or --url \[url\] or -t \[uuid/name\] \[data\] \[signature\])_ | Sets an NPC's skin name. Use -l to set the skin to always update to the latest |
+| /npc skinlayers | _(--cape \[true/false\]) (--hat \[true/false\]) (--jacket \[true/false\]) (--sleeves \[true/false\]) (--pants \[true/false\])_ | Sets an NPC's skin layers visibility. |
+| /npc snowman | _(-d\[erp\])_ | Sets snowman modifiers. |
+| /npc sound | _(--death \[death sound/d\]) (--ambient \[ambient sound/d\]) (--hurt \[hurt sound/d\]) (-n(one)/-s(ilent)) (-d(efault))_ | Sets an NPC's played sounds |
+| /npc spawn | _(id/name) -l(oad chunks)_ | Spawn an existing NPC |
+| /npc speak | _message to speak --target npcid/player\_name --type vocal\_type_ | Uses the NPCs SpeechController to talk |
+| /npc speed | _\[speed\]_ | Sets the movement speed of an NPC as a percentage |
+| /npc swim | _(--set \[true/false\])_ | Sets an NPC to swim or not |
+| /npc targetable | None | Toggles an NPC's targetability |
+| /npc text | None | Toggle the text editor |
+| /npc tfish | _(--body color) (--pattern pattern) (--patterncolor color)_ | Sets tropical fish modifiers |
+| /npc tp | None | Teleport to a NPC |
+| /npc tphere | None | Teleport a NPC to your location |
+| /npc tpto | _\[player name/npc id\] \[player name/npc id\]_ | Teleport an NPC or player to another NPC or player |
+| /npc type | _\[type\]_ | Sets an NPC's entity type |
+| /npc villager | _(--level level) (--type type) (--profession profession)_ | Sets villager modifiers |
+| /npc vulnerable | _(-t)_ | Toggles an NPC's vulnerability |
+| /npc wither | _(--charged \[charged\])_ | Sets wither modifiers |
+| /npc wolf | _(-s(itting) a(ngry) t(amed) i(nfo)) --collar \[hex rgb color/name\]_ | Sets wolf modifiers |
+| /trait | _\[trait1\] \[trait2\] ... \[traitN_ - A list of [Traits](https://wiki.citizensnpcs.co/Characters "Characters") to apply | Adds the [trait type](https://wiki.citizensnpcs.co/Characters "Characters") to the NPC. NPCs can have multiple traits. Example: `/trait sentinel` |

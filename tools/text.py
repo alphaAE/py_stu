@@ -176,7 +176,7 @@ if __name__ == '__main__':
         outfile = open("./DataSource/my2.txt", 'w', encoding='utf8')
         words = file.readlines()
         for word in words:
-            content = word.split('|')[4]
+            content = word.split('|')[3]
             results = get_translate_words(content)
             print(content, results)
 
