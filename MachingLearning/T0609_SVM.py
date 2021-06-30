@@ -8,7 +8,7 @@ from sklearn.svm import SVC
 
 #读数据
 def process_data():
-    data = pd.read_csv("E:/data/breast-cancer-wisconsin.csv")
+    data = pd.read_csv("./DataSource/breast-cancer-wisconsin.csv")
     #去重
     data = data.drop_duplicates()
     #处理异常值(替换？）将？设置为Nan
