@@ -34,7 +34,8 @@ def decisionTree(X_train, X_test, y_train, y_test):
     y_pred = clf.predict(X_test)
     # 渲染dot到pdf
     dot_data = tree.export_graphviz(clf,
-                                    out_file=None,
+                                    feature_names=None,
+                                    class_names=None,
                                     filled=True,
                                     rounded=True)
     graph = graphviz.Source(dot_data)
