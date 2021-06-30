@@ -1,9 +1,10 @@
-from sklearn.model_selection import train_test_split
-import pandas as pd
-import numpy as np
-from sklearn import tree
+import graphviz
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn import tree
 from sklearn.metrics import precision_score, recall_score
+from sklearn.model_selection import train_test_split
 
 
 #读数据
@@ -31,6 +32,14 @@ def decisionTree(X_train, X_test, y_train, y_test):
     clf = tree.DecisionTreeClassifier(criterion="entropy")
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
+    # 渲染dot到pdf
+    dot_data = tree.export_graphviz(clf,
+                                    out_file=None,
+                                    filled=True,
+                                    rounded=True)
+    graph = graphviz.Source(dot_data)
+    graph.render("tree")
+
     return y_pred
 
 

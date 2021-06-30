@@ -1,0 +1,78 @@
+/npc - Show basic NPC information
+/npc age [age] (-l) - Set the age of a NPC
+/npc ai (true|false) - Sets whether the NPC should use vanilla AI
+/npc anchor (--save [name]|--assume [name]|--remove [name]) (-a)(-c) - Changes/Saves/Lists NPC's location anchor(s)
+/npc armorstand --visible [visible] --small [small] --gravity [gravity] --arms [arms] --baseplate [baseplate] - Edit armorstand properties
+/npc bossbar --color [color] --title [title] --visible [visible] --flags [flags] - Edit bossbar properties
+/npc chunkload - Toggle the NPC forcing chunks to stay loaded
+/npc collidable - Toggles an NPC's collidability
+/npc command|cmd (add [command] | remove [id] | permissions [permissions] | sequential | random | cost [cost]) (-l[eft]/-r[ight]) (-p[layer] -o[p]), --cooldown [seconds] --delay [ticks] --permissions [perms] --n [max # of uses] - Controls commands which will be run when clicking on an NPC
+/npc controllable|control (-m(ount),-y,-n,-o) - Toggles whether the NPC can be ridden and controlled
+/npc copier - Toggle the NPC copier
+/npc copy (--name newname) - Copies an NPC
+/npc create [name] ((-b(aby),u(nspawned),s(ilent),t(emporary)) --at [x:y:z:world] --type [type] --trait ['trait1, trait2...'] --registry [registry name]) - Create a new NPC
+/npc despawn (id) - Despawn a NPC
+/npc drops - Edit an NPC's drops
+/npc endercrystal -b - Edit endercrystal modifiers
+/npc enderman -a[ngry] - Set enderman modifiers
+/npc equip - Toggle the equipment editor
+/npc flyable (true|false) - Toggles or sets an NPC's flyable status
+/npc follow (player name|NPC id) (-p[rotect]) - Toggles NPC following you
+/npc gamemode [gamemode] - Changes the gamemode
+/npc glowing --color [minecraft chat color] - Toggles an NPC's glowing status
+/npc gravity - Toggles gravity
+/npc gui - Display NPC configuration GUI
+/npc hologram add [text] | set [line #] [text] | remove [line #] | clear | lineheight [height] | direction [up|down] - Controls NPC hologram text
+/npc horse|llama|donkey|mule (--color color) (--type type) (--style style) (-cb) - Sets horse and horse-like entity modifiers
+/npc id - Sends the selected NPC's ID to the sender
+/npc inventory - Show's an NPC's inventory
+/npc item [item] (data) - Sets the NPC's item
+/npc leashable - Toggles leashability
+/npc list (page) ((-a) --owner (owner) --type (type) --char (char) --registry (name)) - List NPCs
+/npc llama (--color color) (--strength strength) - Sets llama modifiers
+/npc lookclose --(random|r)look [true|false] --(random|r)pitchrange [min,max] --(random|r)yawrange [min,max] - Toggle whether a NPC will look when a player is near
+/npc metadata set|get|remove [key] (value) (-t(emporary)) - Manages NPC metadata
+/npc minecart (--item item_name(:data)) (--offset offset) - Sets minecart item
+/npc mount (--onnpc <npc id>) (-c (ancel)) - Mounts a controllable NPC
+/npc moveto x:y:z:world | x y z world - Teleports a NPC to a given location
+/npc name (-h(over)) - Toggle nameplate visibility, or only show names on hover
+/npc ocelot (--type type) (-s(itting), -n(ot sitting)) - Set the ocelot type of an NPC and whether it is sitting
+/npc owner [name] - Set the owner of an NPC
+/npc parrot (--variant variant) - Sets parrot modifiers
+/npc passive (--set [true|false]) - Sets whether an NPC damages other entities or not
+/npc path - Toggle the waypoint editor
+/npc pathopt --avoid-water|aw [true|false] --stationary-ticks [ticks] --attack-range [range] --distance-margin [margin] --path-distance-margin [margin] --use-new-finder [true|false] - Sets an NPC's pathfinding options
+/npc pathrange [range] - Sets an NPC's pathfinding range
+/npc pathto [x] [y] [z] - Starts pathfinding to a certain location
+/npc playerlist (-a,r) - Sets whether the NPC is put in the playerlist
+/npc polarbear (-r) - Sets polarbear modifiers.
+/npc pose (--save [name] (-d)|--assume [name]|--remove [name]|--default [name]) (-a) - Changes/Saves/Lists NPC's head pose(s)
+/npc power - Toggle a creeper NPC as powered
+/npc profession|prof [profession] - Set a NPC's profession
+/npc rabbittype [type] - Set the Type of a Rabbit NPC
+/npc remove|rem (all|id|name| --owner [owner] | --eid [entity uuid]) - Remove a NPC
+/npc rename [name] - Rename a NPC
+/npc respawn [delay in ticks] - Sets an NPC's respawn delay in ticks
+/npc scoreboard --addtag [tags] --removetag [tags] - Controls an NPC's scoreboard
+/npc script --add [files] --remove [files] - Controls an NPC's scripts
+/npc select|sel [id|name] (--r range) (--registry [name]) - Select a NPC with the given ID or name
+/npc sheep (--color [color]) (--sheared [sheared]) - Sets sheep modifiers
+/npc shulker (--peek [peek] --color [color]) - Sets shulker modifiers.
+/npc size [size] - Sets the NPC's size
+/npc skin (-c -l(atest)) [name] (or --url [url] or -t [uuid/name] [data] [signature]) - Sets an NPC's skin name. Use -l to set the skin to always update to the latest
+/npc skinlayers (--cape [true|false]) (--hat [true|false]) (--jacket [true|false]) (--sleeves [true|false]) (--pants [true|false]) - Sets an NPC's skin layers visibility.
+/npc snowman (-d[erp]) - Sets snowman modifiers.
+/npc sound (--death [death sound|d]) (--ambient [ambient sound|d]) (--hurt [hurt sound|d]) (-n(one)/-s(ilent)) (-d(efault)) - Sets an NPC's played sounds
+/npc spawn (id|name) -l(oad chunks) - Spawn an existing NPC
+/npc speak message to speak --target npcid|player_name --type vocal_type - Uses the NPCs SpeechController to talk
+/npc speed [speed] - Sets the movement speed of an NPC as a percentage
+/npc swim (--set [true|false]) - Sets an NPC to swim or not
+/npc targetable - Toggles an NPC's targetability
+/npc text - Toggle the text editor
+/npc tp - Teleport to a NPC
+/npc tphere (cursor) (-c(enter)) - Teleport a NPC to your location
+/npc tpto [player name|npc id] [player name|npc id] - Teleport an NPC or player to another NPC or player
+/npc type [type] - Sets an NPC's entity type
+/npc vulnerable (-t) - Toggles an NPC's vulnerability
+/npc wither (--charged [charged]) - Sets wither modifiers
+/npc wolf (-s(itting) a(ngry) t(amed) i(nfo)) --collar [hex rgb color|name] - Sets wolf modifiers
